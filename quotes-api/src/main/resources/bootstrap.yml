@@ -3,7 +3,16 @@ server:
 spring:
   application:
     name: quotes-api
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rm
+    password: rmp
   cloud:
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
     openfeign:
       client:
         config:
@@ -14,5 +23,17 @@ spring:
     config:
       profile: local
       discovery:
-        enabled: false
+        enabled: true
         service-id: config-server
+      fail-fast: true
+      retry:
+        max-attempts: 20
+        max-interval: 15000
+        initial-interval: 10000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
