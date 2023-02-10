@@ -12,6 +12,7 @@ import com.exchangeinformant.util.Tinkoff;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.tinkoff.invest.openapi.MarketContext;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Tinkoff
 @Slf4j
+@RefreshScope
 public class TinkoffStockService implements StockService {
     private final InfoRepository infoRepository;
     private final StockRepository stockRepository;

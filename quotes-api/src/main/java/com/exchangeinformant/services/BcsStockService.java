@@ -14,6 +14,7 @@ import com.exchangeinformant.util.Bcs;
 import com.exchangeinformant.util.StockClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created in IntelliJ
@@ -32,6 +34,7 @@ import java.util.Objects;
 @Service
 @Bcs
 @Slf4j
+@RefreshScope
 public class BcsStockService implements StockService {
 
     private final InfoRepository infoRepository;
@@ -59,7 +62,10 @@ public class BcsStockService implements StockService {
             saveAllStocks();
         }
 
-        List<Stock> allStocks = stockRepository.findAllBySource(serviceName);
+        List<Stock> allStocks = stockRepository.findAllBySource(serviceName)
+                .stream()
+                .limit(500)
+                .collect(Collectors.toList());
         for (Stock stock : allStocks) {
             try {
                 List<StockDTO> foundStock = stockClient.findOneStock(stock.getSecureCode());
