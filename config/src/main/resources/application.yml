@@ -15,11 +15,14 @@ spring:
       server:
         native:
           searchLocations: classpath:config/
+    bus:
+      refresh:
+        enabled: true
 management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
 eureka:
   client:
     enabled: true
