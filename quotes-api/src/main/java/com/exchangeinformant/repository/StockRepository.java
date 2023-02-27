@@ -8,11 +8,6 @@ import java.util.List;
 
 @Repository
 public interface StockRepository extends JpaRepository<Stock,String> {
-    List<Stock> findAllBySecureCode(String secureCode);
     Stock findBySecureCode(String secureCode);
-
-    boolean existsBySecureCode(String secureCode);
-
     List<Stock> findAllBySource(String source);
-
 }

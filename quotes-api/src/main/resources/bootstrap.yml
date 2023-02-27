@@ -3,23 +3,7 @@ server:
 spring:
   application:
     name: quotes-api
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: rm
-    password: rmp
   cloud:
-    bus:
-      enabled: true
-      refresh:
-        enabled: true
-    openfeign:
-      client:
-        config:
-          stockClient:
-            url: https://api.bcs.ru
-            request-interceptors:
-              - com.exchangeinformant.configuration.StockClientInterceptor
     config:
       profile: local
       discovery:
@@ -30,15 +14,7 @@ spring:
         max-attempts: 20
         max-interval: 15000
         initial-interval: 10000
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-    enabled: true
-    register-with-eureka: true
-    fetch-registry: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+    bus:
+      enabled: true
+      refresh:
+        enabled: true

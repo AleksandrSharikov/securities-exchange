@@ -10,13 +10,12 @@ import com.exchangeinformant.model.Info;
 import com.exchangeinformant.model.Stock;
 import com.exchangeinformant.repository.InfoRepository;
 import com.exchangeinformant.repository.StockRepository;
-import com.exchangeinformant.util.Bcs;
 import com.exchangeinformant.util.StockClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import java.time.LocalDateTime;
@@ -31,8 +30,7 @@ import java.util.stream.Collectors;
  * Date: 05.01.2023
  * Time: 17:27
  */
-@Service
-@Bcs
+@Service("bcs")
 @Slf4j
 @RefreshScope
 public class BcsStockService implements StockService {
@@ -51,14 +49,14 @@ public class BcsStockService implements StockService {
         this.stockClient = stockClient;
     }
 
-    @Scheduled(cron = "0 */3 * * * *")
     @Override
+    @Transactional
     public void updateAllStocks() {
         if(nameRepository.findAll(serviceName).isEmpty()){
             getAllStocks();
         }
 
-        if (stockRepository.findAllBySource(serviceName).isEmpty()) {
+        if (stockRepository.findAllBySource(serviceName).isEmpty() || stockRepository.findAllBySource(serviceName).size() <1000) {
             saveAllStocks();
         }
 
@@ -70,7 +68,6 @@ public class BcsStockService implements StockService {
             try {
                 List<StockDTO> foundStock = stockClient.findOneStock(stock.getSecureCode());
                 StockDTO stockDTO = Objects.requireNonNull(foundStock).get(0);
-                stockRepository.save(new Stock(stockDTO.getSecureCode(),stockDTO.getIssuer(), stockDTO.getCurrency(),serviceName));
                 InfoDTO infoDTO = stockDTO.getInfoList();
                 Info info = convertInfoDTOToInfo(infoDTO);
                 info.setSecureCode(stock.getSecureCode());

@@ -1,4 +1,9 @@
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rm
+    password: rmp
   datasource:
     username: postgres
     password: postgres
@@ -7,7 +12,21 @@ spring:
     redis:
       host: localhost
       port: 6379
+  cloud:
+    openfeign:
+      client:
+        config:
+          stockClient:
+            url: https://api.bcs.ru
+            request-interceptors:
+              - com.exchangeinformant.configuration.StockClientInterceptor
 eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
   instance:
       preferIpAddress: true
       lease-renewal-interval-in-seconds: 30
@@ -18,16 +37,19 @@ bcs:
     all-stocks: /partner/quotations?portfolio_ids%5B0%5D=115 # &limit=500
     partner-token: A5264D52-1510-4E42-8E90-E729FF405646
     one-stock: /udfdatafeed/v1/info?instruments={secureCode}&inOrderArray=true
-webclient:
-  timeout: 10000
 tinkoff:
   api:
     sandbox: t.OlKXgNUlgSJ9X1JGcJ8J_ABQcVhJJ6wdMYTZB6Owyx0zqA5i1MoWPcm-3b1ma_XrZtj5OooL7AI2GEQXZgZeMg
     is-sandbox-mode: true
 quotes:
-  supplier: bcs # bcs or tinkoff
+  supplier: bcs  # bcs or tinkoff
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
   api-docs:
     enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

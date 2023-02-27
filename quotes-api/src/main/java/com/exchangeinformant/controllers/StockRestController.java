@@ -3,6 +3,8 @@ package com.exchangeinformant.controllers;
 import com.exchangeinformant.model.Stock;
 import com.exchangeinformant.services.StockDbService;
 import com.exchangeinformant.services.StockService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -15,12 +17,14 @@ import java.util.List;
  */
 
 @RestController
+@RefreshScope
 public class StockRestController {
 
     private final StockDbService stockDbService;
     private final StockService stockService;
 
-    public StockRestController(StockDbService stockDbService, StockService stockService) {
+
+    public StockRestController(StockDbService stockDbService, @Qualifier("stockServiceSearcher") StockService stockService) {
         this.stockDbService = stockDbService;
         this.stockService = stockService;
     }

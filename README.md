@@ -18,9 +18,9 @@
     - [Аутентификация](#аутентификация)
     - [Liquibase](#liquibase)
     - [API Gateway Руководство](#api-gateway)
-    - [Docker-Compose и Keycloak Руководство](#-docker-compose--keycloak)
-    - [Keycloak подключение сервиса](#-service--keycloak----)
-    - [Запуск Quotes-API](#--quotes-api)
+    - [Docker-Compose и Keycloak Руководство](#docker-compose--keycloak)
+    - [Keycloak подключение сервиса](#подключить-service-к-keycloak-в-качестве-ресурс-сервера)
+    - [Запуск Quotes-API](#quotes-api)
 
 ### Summary
 
@@ -238,7 +238,7 @@ Swagger и Postman.
 3. Прописываем uri: lb://(название вашего сервиса)
 4. В predicates прописываем адреса к которым будет обращаться gateway - Path=/адрес
 
-### Настройка Docker-Compose и Keycloak
+### Docker-Compose и Keycloak
 
 1. В Maven сделать clean и install по всем сервисам.
 2. Запустить все сервисы в docker-compose.yaml.
@@ -258,7 +258,7 @@ Swagger и Postman.
 3. Создаем классы RealmRoleConverter и ResourceServerConfig в пакете config по аналогии с user-profile
 4. С помощью аннотации <code> @RolesAllowed({"ADMIN"})</code> ограничиваем доступ к своим контроллерам только по определенной роли
 
-### Работа с Quotes API
+### Quotes API
 1. Запускаем основной Eureka Server, postgres и redis (последние два можно запустить через docker compose)
 2. В config сервисе в файле quotes-api-local (если запускаем локально) выбираем через какой сервис будем получить акции: Tinkoff или Bcs. После выбора запускаем сервис.
 3. Запускаем сервис quites-api и ждём 3 минуты для того, чтобы в бд отразился список всех доступных акций данного сервиса (у Тинькофф - 2250, у БКС -500) и стоимость этих акций (у Тинькофф стоимость появится только у 200 акций из-за ограничений)
