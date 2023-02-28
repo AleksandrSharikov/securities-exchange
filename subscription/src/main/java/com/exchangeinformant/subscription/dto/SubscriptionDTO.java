@@ -5,6 +5,7 @@ import com.exchangeinformant.subscription.model.Tariff;
 import com.exchangeinformant.subscription.util.enums.Interval;
 import com.exchangeinformant.subscription.util.enums.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import lombok.Data;
 import org.mapstruct.Mapper;
 import org.springframework.validation.annotation.Validated;
@@ -52,6 +53,8 @@ public class SubscriptionDTO {
     private int userId;
     @Schema(description = "Действительность промоподписки")
     private Boolean isPromo;
+    @Schema(description = "Описание ошибки платежа")
+    private String errorDescription;
     @Schema(description = "Промоподписка")
     private PromoSubscription promoSubscription;
 }
