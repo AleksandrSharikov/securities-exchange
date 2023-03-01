@@ -4,4 +4,9 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      profile: dev
+      profile: local
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8890/realms/project-realm/protocol/openid-connect/certs
