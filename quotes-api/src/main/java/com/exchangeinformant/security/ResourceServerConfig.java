@@ -1,4 +1,4 @@
-package com.exchangeinformant.configuration;
+package com.exchangeinformant.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

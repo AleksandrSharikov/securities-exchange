@@ -18,3 +18,15 @@ spring:
       enabled: true
       refresh:
         enabled: true
+      env:
+        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8890/realms/project-realm/protocol/openid-connect/certs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

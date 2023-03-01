@@ -18,6 +18,8 @@ spring:
     bus:
       refresh:
         enabled: true
+      env:
+        enabled: true
 management:
   endpoints:
     web:

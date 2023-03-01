@@ -9,7 +9,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -24,7 +23,6 @@ import java.util.List;
 @RestController
 @RefreshScope
 @Tag(name = "Контроллер Quotes", description = "Позволяет получить список всех акций, а также цены на акции")
-@Slf4j
 public class StockRestController {
     private final StockDbService stockDbService;
     private final StockService stockService;

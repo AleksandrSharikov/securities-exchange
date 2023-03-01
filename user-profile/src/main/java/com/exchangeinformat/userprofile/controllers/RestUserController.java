@@ -1,7 +1,6 @@
 package com.exchangeinformat.userprofile.controllers;
 
 import com.exchangeinformat.userprofile.entityDTO.UserDTO;
-import com.exchangeinformat.userprofile.mappers.UserMappers;
 import com.exchangeinformat.userprofile.service.UserInfoService;
 import com.exchangeinformat.userprofile.service.UserService;
 import com.exchangeinformat.userprofile.util.Data;
@@ -122,7 +121,7 @@ public class RestUserController {
             return "ИНФО ИЗ БАЗЫ USER: " + userInfoService.getById(extId);
         }
         streamBridge.send("producer-out-0", extId);
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         return "ИНФО ИЗ quotes: " + userInfoService.getById(extId);
     }
 

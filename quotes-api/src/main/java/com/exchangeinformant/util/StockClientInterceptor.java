@@ -1,5 +1,6 @@
-package com.exchangeinformant.configuration;
+package com.exchangeinformant.util;
 
+import com.exchangeinformant.configuration.BcsConfig;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.context.annotation.Configuration;
