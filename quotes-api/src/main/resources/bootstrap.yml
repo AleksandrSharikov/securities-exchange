@@ -4,6 +4,20 @@ spring:
   application:
     name: quotes-api
   cloud:
+    stream:
+      function:
+        definition: processor
+      bindings:
+        processor-out-0:
+          destination: ei.quotes
+          producer:
+            required-groups:
+              - quotes-group
+        processor-in-0:
+          destination: ei.user
+          group: user-group
+        springCloudBusInput:
+          destination: springCloudBus
     config:
       profile: local
       discovery:
