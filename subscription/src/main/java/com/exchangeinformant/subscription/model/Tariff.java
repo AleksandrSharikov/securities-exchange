@@ -22,6 +22,9 @@ public class Tariff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "tariff_cost")
+    private int tariffCost;
+
     @Column(name = "title")
     private String title;
 

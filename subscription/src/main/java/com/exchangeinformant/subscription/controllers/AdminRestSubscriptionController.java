@@ -1,6 +1,7 @@
 package com.exchangeinformant.subscription.controllers;
 
 import com.exchangeinformant.subscription.dto.SubscriptionDTO;
+import com.exchangeinformant.subscription.service.LogicForPaymentProofService;
 import com.exchangeinformant.subscription.service.SubscriptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,15 +30,9 @@ public class AdminRestSubscriptionController {
     }
 
     @GetMapping("/subscriptions")
-<<<<<<< subscription/src/main/java/com/exchangeinformant/subscription/controllers/AdminRestSubscriptionController.java
     @RolesAllowed({"ADMIN"})
     @Operation(summary = "Получить все подписки.")
     public ResponseEntity<List<SubscriptionDTO>> getSubscriptions() {
-=======
-    @RolesAllowed({"USER", "ADMIN"})
-    @Operation(summary = "Получить все подписки.")
-    public ResponseEntity<List<SubscriptionDTO>> getSubscription() {
->>>>>>> subscription/src/main/java/com/exchangeinformant/subscription/controllers/AdminRestSubscriptionController.java
         return ResponseEntity.ok(subscriptionService.getAllSubscription());
     }
 
