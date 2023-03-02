@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @OpenAPIDefinition(
@@ -18,7 +17,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
         servers = @Server(url = "/quotes")
 )
 @SpringBootApplication
-@EnableScheduling
 @EnableConfigurationProperties
 @EnableFeignClients
 public class QuotesApiApplication {

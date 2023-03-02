@@ -20,6 +20,15 @@ spring:
         enabled: true
       env:
         enabled: true
+      trace:
+        enabled: true
+      enabled: true
+    stream:
+      bindings:
+        springCloudBusOutput:
+          destination: springCloudBus
+        springCloudBusInput:
+          destination: springCloudBus
 management:
   endpoints:
     web:

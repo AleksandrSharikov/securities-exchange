@@ -39,7 +39,7 @@ bcs:
     one-stock: /udfdatafeed/v1/info?instruments={secureCode}&inOrderArray=true
 tinkoff:
   api:
-    sandbox: t.OlKXgNUlgSJ9X1JGcJ8J_ABQcVhJJ6wdMYTZB6Owyx0zqA5i1MoWPcm-3b1ma_XrZtj5OooL7AI2GEQXZgZeMg
+    sandbox:                                                        # вставить свой sanbox token от Тинькофф
     is-sandbox-mode: true
 quotes:
   supplier: bcs # bcs or tinkoff

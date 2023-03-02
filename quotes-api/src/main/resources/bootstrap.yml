@@ -5,9 +5,11 @@ spring:
     name: quotes-api
   cloud:
     stream:
-      function:
-        definition: processor
       bindings:
+        springCloudBusInput:
+          destination: springCloudBus
+        springCloudBusOutput:
+          destination: springCloudBus
         processor-out-0:
           destination: ei.quotes
           producer:
@@ -16,8 +18,8 @@ spring:
         processor-in-0:
           destination: ei.user
           group: user-group
-        springCloudBusInput:
-          destination: springCloudBus
+      function:
+        definition: processor;busConsumer
     config:
       profile: local
       discovery:
