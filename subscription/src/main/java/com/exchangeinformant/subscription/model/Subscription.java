@@ -59,6 +59,9 @@ public class Subscription {
     @Column(name = "is_promo")
     private Boolean isPromo;
 
+    @Column(name = "error_description")
+    private String errorDescription;
+
     @OneToOne
     @JoinColumn(name = "promocode_id")
     private PromoSubscription promoSubscription;

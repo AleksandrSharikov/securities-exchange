@@ -1,3 +1,4 @@
+
 package com.exchangeinformant.subscription.util.rabbitMQ;
 
 import lombok.AllArgsConstructor;
