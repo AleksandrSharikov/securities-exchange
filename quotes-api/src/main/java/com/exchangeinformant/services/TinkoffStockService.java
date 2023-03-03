@@ -8,12 +8,11 @@ import com.exchangeinformant.model.Info;
 import com.exchangeinformant.model.Stock;
 import com.exchangeinformant.repository.InfoRepository;
 import com.exchangeinformant.repository.StockRepository;
-import com.exchangeinformant.util.Tinkoff;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.tinkoff.invest.openapi.MarketContext;
 import ru.tinkoff.invest.openapi.OpenApi;
 import ru.tinkoff.invest.openapi.model.rest.MarketInstrument;
@@ -27,10 +26,9 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
-@Tinkoff
+@Service("tinkoff")
 @Slf4j
+@RefreshScope
 public class TinkoffStockService implements StockService {
     private final InfoRepository infoRepository;
     private final StockRepository stockRepository;
@@ -39,20 +37,26 @@ public class TinkoffStockService implements StockService {
     @Value("${quotes.supplier}")
     private String serviceName;
 
-    @Scheduled(cron = "0 */3 * * * *")
+    public TinkoffStockService(InfoRepository infoRepository, StockRepository stockRepository, NameRepositoryRedis nameRepository, OpenApi openApi) {
+        this.infoRepository = infoRepository;
+        this.stockRepository = stockRepository;
+        this.nameRepository = nameRepository;
+        this.openApi = openApi;
+    }
+
     @Override
+    @Transactional
     public void updateAllStocks() {
         if(nameRepository.findAll(serviceName).isEmpty()){
             getAllStocks();
         }
-        if (stockRepository.findAllBySource(serviceName).isEmpty()) {
+        if (stockRepository.findAllBySource(serviceName).isEmpty() || stockRepository.findAllBySource(serviceName).size() <1000) {
             saveAllStocks();
         }
-
         List<Stock> stocks = stockRepository.findAllBySource(serviceName)
                 .stream()
-                .filter(code -> code.getSecureCode().length()<=5)
-                .limit(180)
+                .filter(code -> code.getSecureCode().length()<5)
+                .limit(150)
                 .collect(Collectors.toList());
         for (Stock stock : stocks) {
             Info updatedStock = getInfoByCode(stock.getSecureCode());
@@ -74,8 +78,9 @@ public class TinkoffStockService implements StockService {
     private void saveAllStocks() {
         nameRepository.findAll(serviceName)
                 .stream().map(Name.class::cast)
-                .forEach(n -> stockRepository.save(new Stock(n.getSecureCode(),n.getIssuer(),n.getCurrency(), serviceName)));
+                .forEach(n -> stockRepository.save(new Stock(n.getSecureCode(), n.getIssuer(), n.getCurrency(), serviceName)));
     }
+
     @Override
     public Stock getStockDirectly(String secureCode) {
         MarketContext context = openApi.getMarketContext();
@@ -100,7 +105,7 @@ public class TinkoffStockService implements StockService {
     public List<Stock> getStocksDirectly(List<String> secureCodes) {
         MarketContext context = openApi.getMarketContext();
         List<CompletableFuture<MarketInstrumentList>> marketInstruments = new ArrayList<>();
-        secureCodes.forEach(code -> marketInstruments.add(getMarketInstrumentTicker(code)));
+        secureCodes.forEach(code -> marketInstruments.add(context.searchMarketInstrumentsByTicker(code)));
         return   marketInstruments.stream()
                 .map(CompletableFuture::join)
                 .map(mi -> {
@@ -120,13 +125,6 @@ public class TinkoffStockService implements StockService {
                         ))
                 .collect(Collectors.toList());
     }
-
-    private CompletableFuture<MarketInstrumentList> getMarketInstrumentTicker(String secureCode) {
-        MarketContext context = openApi.getMarketContext();
-        return context.searchMarketInstrumentsByTicker(secureCode);
-    }
-
-
 
     private Info getInfoByCode(String secureCode) {
         MarketContext context = openApi.getMarketContext();

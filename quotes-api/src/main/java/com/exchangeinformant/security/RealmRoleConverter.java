@@ -1,4 +1,4 @@
-package com.exchangeinformant.configuration;
+package com.exchangeinformant.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;

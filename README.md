@@ -18,9 +18,9 @@
     - [Аутентификация](#аутентификация)
     - [Liquibase](#liquibase)
     - [API Gateway Руководство](#api-gateway)
-    - [Docker-Compose и Keycloak Руководство](#-docker-compose--keycloak)
-    - [Keycloak подключение сервиса](#-service--keycloak----)
-    - [Запуск Quotes-API](#--quotes-api)
+    - [Docker-Compose и Keycloak Руководство](#docker-compose--keycloak)
+    - [Keycloak подключение сервиса](#подключить-service-к-keycloak-в-качестве-ресурс-сервера)
+    - [Запуск Quotes-API](#quotes-api)
     - [Swagger](#swagger)
 
 ### Summary
@@ -239,7 +239,7 @@ Swagger и Postman.
 3. Прописываем uri: lb://(название вашего сервиса)
 4. В predicates прописываем адреса к которым будет обращаться gateway - Path=/адрес
 
-### Настройка Docker-Compose и Keycloak
+### Docker-Compose и Keycloak
 
 1. В Maven сделать clean и install по всем сервисам.
 2. Запустить все сервисы в docker-compose.yaml.
@@ -265,11 +265,14 @@ Swagger и Postman.
 3. Создаем классы RealmRoleConverter и ResourceServerConfig в пакете config по аналогии с user-profile
 4. С помощью аннотации <code> @RolesAllowed({"ADMIN"})</code> ограничиваем доступ к своим контроллерам только по определенной роли
 
-### Работа с Quotes API
-1. Запускаем основной Eureka Server, postgres и redis (последние два можно запустить через docker compose)
-2. В config сервисе в файле quotes-api-local (если запускаем локально) выбираем через какой сервис будем получить акции: Tinkoff или Bcs. После выбора запускаем сервис.
-3. Запускаем сервис quites-api и ждём 3 минуты для того, чтобы в бд отразился список всех доступных акций данного сервиса (у Тинькофф - 2250, у БКС -500) и стоимость этих акций (у Тинькофф стоимость появится только у 200 акций из-за ограничений)
-4. По пути "/directStock" можно получить акции напрямую через АПИ, а не через БД (не нужно ждать обновления стоимости каждые 3 минуты). GET запрос - для одной акции, POST запрос - для списка акций.
+### Quotes API
+1. Сначала нужно получить и вставить свой токен Тинькофф в config в quotes-api-local и quotes-api-develop. Вот [ссылка](https://www.tinkoff.ru/business/help/solutions/open-api/about/activation/), где можно узнать информацию. Без этого токена сервис не будет работать.
+2. Запускаем в Докере postgres, redis и rabbit. Также не забываем про KeyCloack и его БД.
+3. В config сервисе в файле quotes-api-local (если запускаем локально) выбираем через какой сервис будем получить акции: Tinkoff или Bcs. 
+4. Запускаем server -> config -> gateway -> quotes. Каждый две минут список всех акций будет обновляться (в Тинькофф - из-за ограничений только 150 акций, в БКС обновляется 500 цен акций - лимит можно убрать в BcsStockService).
+5. При каждом запросе quotes отправляет сообщение в RabbitMQ с информацией об активности юзера на сервисе. Чтобы её можно получить по адресу - http://localhost:8080/profile/api/user/getInfo
+6. Работает Spring Cloud Bus - любое изменение в файле quotes-api-local будет отражаться на сервисе сразу без перезапуска после определённого дилея. Можно менять как будем получать акции. Чтобы зафорсить изменения можно перейти по адресу - http://localhost:8888/actuator/bus-refresh
+7. По пути "/directStock" можно получить акции напрямую через АПИ, а не через БД (не нужно ждать обновления стоимости каждые 2 минуты). GET запрос - для одной акции, POST запрос - для списка акций.
 
 
 ### Swagger

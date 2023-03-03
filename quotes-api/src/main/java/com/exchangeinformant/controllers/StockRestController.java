@@ -4,10 +4,11 @@ import com.exchangeinformant.aop.UserInfoInsertion;
 import com.exchangeinformant.model.Stock;
 import com.exchangeinformant.services.StockDbService;
 import com.exchangeinformant.services.StockService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,13 +21,14 @@ import java.util.List;
  */
 
 @RestController
+@RefreshScope
 @Tag(name = "Контроллер Quotes", description = "Позволяет получить список всех акций, а также цены на акции")
-@Slf4j
 public class StockRestController {
     private final StockDbService stockDbService;
     private final StockService stockService;
 
-    public StockRestController(StockDbService stockDbService, StockService stockService) {
+
+    public StockRestController(StockDbService stockDbService, @Qualifier("stockServiceSearcher") StockService stockService) {
         this.stockDbService = stockDbService;
         this.stockService = stockService;
     }
@@ -69,7 +71,7 @@ public class StockRestController {
     public List<Stock> getAllAvailableStocks(@RequestBody List<String> securityCodes) {
         return stockDbService.getAllAvailableStocksByCodes(securityCodes);
     }
-    
+
     @Operation(summary = "Получение акции по её SecureCode (тикеру) напрямую с подключенного сервиса (BCS или Tinkoff)")
     @GetMapping("/directStock")
     @UserInfoInsertion

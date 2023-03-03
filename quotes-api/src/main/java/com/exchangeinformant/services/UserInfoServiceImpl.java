@@ -28,8 +28,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         UserInfo userInfo = UserInfo.builder()
                 .userId(id)
                 .counter(counterSetter(id))
-                .lastVisit(visitSetter(id))
                 .lastRequest(LocalDateTime.now())
+                .lastVisit(visitSetter(id))
                 .source(serviceName)
                 .build();
         infoRepository.save(userInfo);
@@ -46,7 +46,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
     }
     private LocalDateTime visitSetter(String id) {
-        if (infoRepository.findById(id).isEmpty()) {
+        if (infoRepository.findById(id).isEmpty() || infoRepository.findById(id).orElseThrow().getLastRequest().getMinute() != LocalDateTime.now().getMinute()) {
             return LocalDateTime.now();
         } else {
             return infoRepository.findById(id).orElseThrow().getLastVisit();
