@@ -473,6 +473,101 @@
       ],
       "notBefore": 0,
       "groups": []
+    },
+    {
+      "username": "user1",
+      "email": "user1@user",
+      "firstName": "user1",
+      "lastName": "user1",
+      "enabled": true,
+      "emailVerified": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user1"
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "USER",
+        "default-roles-project-realm"
+      ]
+    },
+    {
+      "username": "user2",
+      "email": "user2@user",
+      "firstName": "user2",
+      "lastName": "user2",
+      "enabled": true,
+      "emailVerified": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user2"
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "USER",
+        "default-roles-project-realm"
+      ]
+    },
+    {
+      "username": "user3",
+      "email": "user3@user",
+      "firstName": "user3",
+      "lastName": "user3",
+      "enabled": true,
+      "emailVerified": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user3"
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "USER",
+        "default-roles-project-realm"
+      ]
+    },
+    {
+      "username": "user4",
+      "email": "user4@user",
+      "firstName": "user4",
+      "lastName": "user4",
+      "enabled": true,
+      "emailVerified": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user4"
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "USER",
+        "default-roles-project-realm"
+      ]
+    },
+    {
+      "username": "user5",
+      "email": "user5@user",
+      "firstName": "user5",
+      "lastName": "user5",
+      "enabled": true,
+      "emailVerified": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user5"
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "USER",
+        "default-roles-project-realm"
+      ]
     }
   ],
   "scopeMappings": [
