@@ -1,0 +1,25 @@
+server:
+  port: 0
+spring:
+  application:
+    name: feed
+  cloud:
+    config:
+      profile: local
+      discovery:
+        enabled: false
+        service-id: config-server
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rm
+    password: rmp
+
+
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8890/realms/project-realm/protocol/openid-connect/certs

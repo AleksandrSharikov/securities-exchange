@@ -31,6 +31,15 @@ spring:
             - StripPrefix=1
             - name: Retry
 
+        #Регистрация feed
+        - id: feed
+          uri: lb://feed
+          predicates:
+            - Path=/feed/**
+          filters:
+            - StripPrefix=1
+            - name: Retry
+
         #Регистрация user-profile
         - id: user-profile
           uri: lb://user-profile

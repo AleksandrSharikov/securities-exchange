@@ -1,0 +1,50 @@
+atabaseChangeLog:
+  - changeSet:
+      id: create-feed
+      author: Aleksandr
+      changes:
+        - createTable:
+            tableName: feed
+            columns:
+              - column:
+                  name: product_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: unread
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source
+                  type: mediumint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: rank
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: varchar(150)
+                  constraints:
+                    nullable: true
