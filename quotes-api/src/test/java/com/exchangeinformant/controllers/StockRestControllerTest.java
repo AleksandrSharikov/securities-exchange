@@ -50,6 +50,7 @@ class StockRestControllerTest {
             }
         },"Service");
     }
+
     @Test
     void shouldGetStock() throws Exception {
         when(stockDbService.getStock(Mockito.any())).thenReturn(stock);
