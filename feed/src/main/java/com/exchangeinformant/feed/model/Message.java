@@ -1,5 +1,6 @@
 package com.exchangeinformant.feed.model;
 
+import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class Message {
+
+    public Message(MessageDTO messageDTO){
+        this();
+        this.userId = messageDTO.getUserId();
+        this.sourceId = messageDTO.getSourceId();
+        this.data = messageDTO.getData();
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

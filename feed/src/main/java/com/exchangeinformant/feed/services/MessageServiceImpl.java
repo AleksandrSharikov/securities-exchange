@@ -24,6 +24,7 @@ public class MessageServiceImpl implements MessageService {
         messageRepository.save(message);
     }
 
+
     public List<Message> unreadMessageList(long userId){
        return unreadMessageList(userId, Rank.LOW);
     }
