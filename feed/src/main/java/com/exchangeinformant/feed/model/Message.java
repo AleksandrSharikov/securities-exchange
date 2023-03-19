@@ -27,7 +27,7 @@ public class Message {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     @JsonIgnore
     private long id;
 
@@ -46,8 +46,8 @@ public class Message {
     @Column(name = "type")
     private String type;
 
-    @Column(name =  "rank")
-    private Rank rank;
+   // @Column(name =  "rank")
+   // private Rank rank;
 
     @Column(name = "data")  // May be it is better to store Object here
     private String data;

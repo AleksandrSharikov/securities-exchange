@@ -1,13 +1,13 @@
-atabaseChangeLog:
+databaseChangeLog:
   - changeSet:
       id: create-feed
       author: Aleksandr
       changes:
-        - createTable:
+        - update:
             tableName: feed
             columns:
               - column:
-                  name: product_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -27,10 +27,10 @@ atabaseChangeLog:
                   name: time
                   type: datetime
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: source
-                  type: mediumint
+                  type: int
                   constraints:
                     nullable: false
               - column:
@@ -38,11 +38,11 @@ atabaseChangeLog:
                   type: varchar(25)
                   constraints:
                     nullable: true
-              - column:
-                  name: rank
-                  type: varchar(10)
-                  constraints:
-                    nullable: false
+#              - column:
+#                  name: rank
+#                  type: varchar(10)
+#                  constraints:
+#                    nullable: false
               - column:
                   name: data
                   type: varchar(150)

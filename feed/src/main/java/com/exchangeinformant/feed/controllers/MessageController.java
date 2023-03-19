@@ -3,6 +3,7 @@ package com.exchangeinformant.feed.controllers;
 import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;
 import com.exchangeinformant.feed.model.Message;
+import com.exchangeinformant.feed.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -21,6 +23,8 @@ public class MessageController {
 
     @Autowired
     private RabbitTemplate template;
+    @Autowired
+    private MessageService messageService;
 
 
     @Operation(summary = "Получение сообщений для ленты")
@@ -40,6 +44,14 @@ public class MessageController {
     public String testController(){
         log.info("test controller worked");
         return "test";
+    }
+
+    @Operation(summary = "Получение ленты для пользователя")
+    @GetMapping("/{id}")
+    public List<Message> getUsersFeed(@PathVariable long id)
+    {
+        log.info("requested list for user {} ", id);
+        return messageService.unreadMessageList(id);
     }
 
 }
