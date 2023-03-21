@@ -1,23 +1,17 @@
 databaseChangeLog:
   - changeSet:
-      id: message-2
+      id: notifier_templates-2
       author: a-hasiev
       changes:
         - createTable:
-            tableName: message
+            tableName: notifier_templates
             columns:
               - column:
                   name: id
-                  type: bigint
+                  type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: title
-                  type: varchar(255)
-              - column:
                   name: text
-                  type: varchar(255)
-              - column:
-                  name: platform
-                  type: varchar(255)
+                  type: varchar

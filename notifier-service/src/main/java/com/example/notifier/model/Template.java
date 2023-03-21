@@ -4,18 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * @author Mikhailov Artem
+ * Шаблон представляет собой текст, в который включены переменные в формате ${name_var} (name_var это имя данной
+ * переменной). Данные переменный будут заменены классом MessageBuilder, на требуемые данные, которые поступают в
+ * формате json
  */
-
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+@Entity(name = "notifier_templates")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Template {
 
-//    Long id; //TODO добавить entity
-//
-//    String title;
-//
-//    String message;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    int id;
+
+    @Column
+    String text;
 
 }

@@ -1,0 +1,18 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: notifier-test
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-add-partitions: true
+          brokers: localhost:9093
+
+      bindings:
+#        bookEventProcessor-out-0:
+#          destination: create-book
+        jsonEventProcessor-out-0:
+          destination: create-json-test

@@ -1,15 +1,16 @@
-package com.example.notifier;
+package com.example.notifiertest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableKafka
-public class NotifierApplication {
+@EnableScheduling
+public class NotifierTestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NotifierApplication.class, args);
+		SpringApplication.run(NotifierTestApplication.class, args);
 	}
 
 }

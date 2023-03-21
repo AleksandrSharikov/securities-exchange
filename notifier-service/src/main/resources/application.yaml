@@ -1,0 +1,37 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: notifier-service
+  cloud:
+    config:
+      profile: local
+      discovery:
+        enabled: false
+        service-id: config-server
+    stream:
+      bindings:
+        messageInProcessor-in-0:
+          destination: create-json-test
+      kafka:
+        binder:
+          auto-add-partitions: true
+          brokers: localhost:9093
+      rabbit:
+        binder:
+          host: localhost
+          port: 5672
+          username: rm
+          password: rmp
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    protocol: smtps
+    username: asadas.asasdasd@yandex.ru
+    password: nlzezznxutzpiyws
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            trust: smtp.yandex.ru
