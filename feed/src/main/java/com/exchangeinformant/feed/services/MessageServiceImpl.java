@@ -28,8 +28,9 @@ public class MessageServiceImpl implements MessageService {
         message.setUnread(true);
        // message.setRank(Rank.MEDIUM);
         message.setId(1L);
+        message.setSourceId(1);
         log.info("MessageDTO translated to message  \" {} \" and prepared to save", message);
-        messageRepository.save(message);
+      //  messageRepository.save(message);
         log.info("Message has been processed");
     }
 
