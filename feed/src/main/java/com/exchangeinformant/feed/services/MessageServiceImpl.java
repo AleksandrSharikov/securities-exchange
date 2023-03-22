@@ -32,7 +32,7 @@ public class MessageServiceImpl implements MessageService {
         Message message = new Message(messageDTO);
         message.setReceivingTime(LocalDateTime.now());
         message.setUnread(true);
-
+        setRank(message);
         log.info("MessageDTO translated to message  \" {} \" and prepared to save", message);
         messageRepository.save(message);
         log.info("Message has been processed");
@@ -45,10 +45,13 @@ public class MessageServiceImpl implements MessageService {
 
 
     public List<Message> unreadMessageList(long userId){
-       return unreadMessageList(userId, Rank.LOW);
+       return unreadMessageList(userId, 0);
     }
     @Override
-    public List<Message> unreadMessageList(long userId, Rank rank) {
-    return null;//messageRepository.messagesForUser(userId);
+    public List<Message> unreadMessageList(long userId, int rank) {
+        List<Message> answer = messageRepository.messagesForUser(userId, rank);
+        messageRepository.markListRead(userId, rank);
+    return answer;
+
     }
 }

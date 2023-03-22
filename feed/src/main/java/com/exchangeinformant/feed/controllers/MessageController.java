@@ -47,11 +47,11 @@ public class MessageController {
     }
 
     @Operation(summary = "Получение ленты для пользователя")
-    @GetMapping("/{id}")
-    public List<Message> getUsersFeed(@PathVariable long id)
+    @GetMapping("/{id}/{rank}")
+    public List<Message> getUsersFeed(@PathVariable long id, @PathVariable(required = false) Integer rank)
     {
         log.info("requested list for user {} ", id);
-        return messageService.unreadMessageList(id);
+        return rank == null ? messageService.unreadMessageList(id) : messageService.unreadMessageList(id,rank);
     }
 
 }
