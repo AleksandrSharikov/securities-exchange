@@ -7,18 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TemplateServiceImpl implements TemplateService {
-
     private final TemplateRepository templateRepository;
-
     public TemplateServiceImpl(TemplateRepository templateRepository) {
         this.templateRepository = templateRepository;
     }
 
-    //TODO добавить транзакции где необходимо
-
     @Transactional(readOnly = true)
     @Override
-    public Template getTemplateById(int id) {
+    public Template getTemplateById(long id) {
         return templateRepository.findTemplateById(id);
     }
 }

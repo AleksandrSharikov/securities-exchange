@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface TemplateService {
 
-    Template getTemplateById(int id);
+    Template getTemplateById(long id);
 }

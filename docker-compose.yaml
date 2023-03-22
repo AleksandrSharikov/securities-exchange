@@ -157,7 +157,6 @@ services:
     ports:
       - 6379:6379
       - 8001:8001
-  # от Zookeeper зависит Kafka, перед запуском Kafka, требуется запуск Zookeeper
   zookeeper:
     restart: always
     image: docker.io/bitnami/zookeeper:3.8

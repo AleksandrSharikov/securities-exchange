@@ -20,19 +20,20 @@ public class JsonService {
     private final LinkedList<String> jsonCreationEvents;
 
     @Scheduled(fixedRate = 5000)
-    public void generateBook() throws JsonProcessingException {
-        jsonCreationEvents.add(creatJson());
+    public void generateJson() throws JsonProcessingException {
+        jsonCreationEvents.add(createJson());
     }
 
-    private String creatJson() throws JsonProcessingException {
+    private String createJson() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> data = new HashMap<>();
-        data.put("id_template", 1);
+        data.put("template_id", 1);
         data.put("name", "Alex");
         data.put("number_order", "1000356");
         data.put("date_delivery", "11.04.2023");
         data.put("serviceSender", "Email");
-        String jsonString = objectMapper.writeValueAsString(data);
-        return jsonString;
+        data.put("subject", "Test");
+        data.put("user_id", 5);
+        return objectMapper.writeValueAsString(data);
     }
 }

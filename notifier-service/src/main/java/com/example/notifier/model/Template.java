@@ -14,13 +14,11 @@ import lombok.*;
 @Getter
 @Setter
 public class Template {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    int id;
+    Long id;
 
     @Column
     String text;
-
 }

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: notifier_templates-2
+      id: notifier_templates
       author: a-hasiev
       changes:
         - createTable:
@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
