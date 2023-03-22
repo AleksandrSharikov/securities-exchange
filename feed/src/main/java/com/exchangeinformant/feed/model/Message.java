@@ -24,15 +24,18 @@ public class Message {
         this.userId = messageDTO.getUserId();
         this.sourceId = messageDTO.getSourceId();
         this.data = messageDTO.getData();
+        this.rank = 2;
+        this.unread = true;
+
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @JsonIgnore
-    private long id;
+    private Long id;
 
-    @Column(name = "user")
-    private long userId;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "unread")
     private boolean unread = true;
@@ -46,8 +49,8 @@ public class Message {
     @Column(name = "type")
     private String type;
 
-   // @Column(name =  "rank")
-   // private Rank rank;
+    @Column(name =  "rank")
+    private int rank;
 
     @Column(name = "data")  // May be it is better to store Object here
     private String data;

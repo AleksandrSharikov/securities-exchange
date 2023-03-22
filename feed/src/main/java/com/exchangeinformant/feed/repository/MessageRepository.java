@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message,Long> {
 
-    @Query("SELECT m FROM Message m WHERE m.userId = ?1 and m.unread= true")
-    List<Message> messagesForUser(long id);
+  //  @Query("SELECT m FROM Message m WHERE m.userId = ?1 and m.unread= true")
+  //  List<Message> messagesForUser(long id);
 }

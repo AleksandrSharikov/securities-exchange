@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: user
+                  name: user_id
                   type: bigint
                   constraints:
                     nullable: true
@@ -29,7 +29,7 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: source
+                  name: source  # change to source_id
                   type: int
                   constraints:
                     nullable: false
@@ -38,11 +38,11 @@ databaseChangeLog:
                   type: varchar(25)
                   constraints:
                     nullable: true
-#              - column:
-#                  name: rank
-#                  type: varchar(10)
-#                  constraints:
-#                    nullable: false
+              - column:
+                  name: rank
+                  type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: data
                   type: varchar(150)

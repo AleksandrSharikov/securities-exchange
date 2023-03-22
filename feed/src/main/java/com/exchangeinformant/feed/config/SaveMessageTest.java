@@ -19,7 +19,7 @@ public class SaveMessageTest implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("Appruner starts");
-        Message message = new Message(1,1,true, LocalDateTime.now(),1,"mes","data");
+        Message message = new Message(1L,1L,true, LocalDateTime.now(),1, "mes",2,"data");
         messageRepository.save(message);
         System.out.println("Appruner done");
 
