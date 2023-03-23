@@ -1,3 +1,5 @@
+// Сообщение получаемое с других сервисов
+
 package com.exchangeinformant.feed.DTO;
 
 

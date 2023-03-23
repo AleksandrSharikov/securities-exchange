@@ -1,8 +1,9 @@
+// Тестовый класс для заполнения БД при старте в целях тестирования
+
 package com.exchangeinformant.feed.config;
 
 import com.exchangeinformant.feed.model.Message;
 import com.exchangeinformant.feed.repository.MessageRepository;
-import org.hibernate.annotations.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Component
 public class SaveMessageTest implements ApplicationRunner {
 
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
     @Autowired
     public SaveMessageTest(MessageRepository messageRepository) {this.messageRepository = messageRepository;}
     @Override

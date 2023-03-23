@@ -1,3 +1,5 @@
+//Конотроллеры
+
 package com.exchangeinformant.feed.controllers;
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
@@ -28,7 +30,7 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @Operation(summary = "Тестовая отправка сообщений в очередь")
+    @Operation(summary = "Контроллер для отправки сообщений в очередь с целью тестирования")
     @PostMapping("/publish")
     public String publishMessage(@RequestBody MessageDTO messageDTO) {
 
@@ -37,7 +39,7 @@ public class MessageController {
         return "Message Published";
     }
 
-    @Operation(summary = "Получение ленты для пользователя")
+    @Operation(summary = "Получение ленты для пользователя с определённым id и минимальным rank")
     @GetMapping(value = {"/{id}/{rank}","/{id}"})
     public List<Message> getUsersFeed(@PathVariable long id, @PathVariable(required = false) Integer rank)
     {

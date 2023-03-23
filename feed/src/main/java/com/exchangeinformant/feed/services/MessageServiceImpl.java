@@ -45,6 +45,8 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> unreadMessageList(long userId){
        return unreadMessageList(userId, 0);
     }
+
+
     @Override
     public List<Message> unreadMessageList(long userId, int rank) {
         List<Message> answer = messageRepository.messagesForUser(userId, rank);

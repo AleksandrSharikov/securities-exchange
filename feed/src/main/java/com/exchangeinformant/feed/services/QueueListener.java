@@ -1,3 +1,5 @@
+// Слушатель входной очереди
+
 package com.exchangeinformant.feed.services;
 
 import com.exchangeinformant.feed.DTO.MessageDTO;

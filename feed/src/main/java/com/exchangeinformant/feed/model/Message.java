@@ -1,3 +1,5 @@
+// Сообщение для хранения в БД
+
 package com.exchangeinformant.feed.model;
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
@@ -7,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDateTime;
 

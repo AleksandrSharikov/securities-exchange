@@ -1,3 +1,8 @@
+
+// Создание и настройка очереди и ексченджа Рэббита
+
+
+
 package com.exchangeinformant.feed.config;
 
 

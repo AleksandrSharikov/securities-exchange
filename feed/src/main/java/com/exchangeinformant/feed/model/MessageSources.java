@@ -1,3 +1,5 @@
+// Модель для хранения в БД информации об источниках сообщений
+
 package com.exchangeinformant.feed.model;
 
 import jakarta.persistence.*;
