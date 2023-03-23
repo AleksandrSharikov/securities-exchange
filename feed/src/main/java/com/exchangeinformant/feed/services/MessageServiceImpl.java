@@ -3,8 +3,6 @@ package com.exchangeinformant.feed.services;
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.exchangeinformant.feed.model.Message;
-import com.exchangeinformant.feed.model.MessageSources;
-import com.exchangeinformant.feed.model.Rank;
 import com.exchangeinformant.feed.repository.MessageRepository;
 import com.exchangeinformant.feed.repository.SourceRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +16,14 @@ import java.util.List;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-    private MessageRepository messageRepository;
-    private SourceRepository sourceRepository;
+    private final MessageRepository messageRepository;
+    private final SourceRepository sourceRepository;
 
     @Autowired
     MessageServiceImpl(MessageRepository messageRepository, SourceRepository sourceRepository){
         this.messageRepository = messageRepository;
         this.sourceRepository = sourceRepository;
-    };
+    }
     @Override
     public void receiveMessage(MessageDTO messageDTO) {
         log.info("Message \" {} \" go to service", messageDTO);

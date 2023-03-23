@@ -11,8 +11,13 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 @Component
 public class QueueListener {
 
+
+    private final MessageService messageService;
+
     @Autowired
-    private MessageService messageService;
+    public QueueListener(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public void listener(MessageDTO message) {
