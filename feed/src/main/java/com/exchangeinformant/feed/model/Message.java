@@ -1,6 +1,6 @@
-// Сообщение для хранения в БД
-
 package com.exchangeinformant.feed.model;
+
+// Сообщение для хранения в БД
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;

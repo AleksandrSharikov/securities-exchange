@@ -1,7 +1,6 @@
-// Сообщение получаемое с других сервисов
-
 package com.exchangeinformant.feed.DTO;
 
+// Сообщение получаемое с других сервисов
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

@@ -1,6 +1,8 @@
+package com.exchangeinformant.feed.config;
+
+
 // Тестовый класс для заполнения БД при старте в целях тестирования
 
-package com.exchangeinformant.feed.config;
 
 import com.exchangeinformant.feed.model.Message;
 import com.exchangeinformant.feed.repository.MessageRepository;

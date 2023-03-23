@@ -1,6 +1,6 @@
-//Конотроллеры
-
 package com.exchangeinformant.feed.controllers;
+
+//Конотроллеры
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;

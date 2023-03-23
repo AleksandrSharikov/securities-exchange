@@ -1,6 +1,6 @@
-// Модель для хранения в БД информации об источниках сообщений
-
 package com.exchangeinformant.feed.model;
+
+// Модель для хранения в БД информации об источниках сообщений
 
 import jakarta.persistence.*;
 import lombok.Data;

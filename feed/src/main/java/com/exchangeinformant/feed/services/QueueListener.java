@@ -1,6 +1,8 @@
+package com.exchangeinformant.feed.services;
+
+
 // Слушатель входной очереди
 
-package com.exchangeinformant.feed.services;
 
 import com.exchangeinformant.feed.DTO.MessageDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;

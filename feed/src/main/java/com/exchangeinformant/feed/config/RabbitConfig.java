@@ -1,10 +1,6 @@
-
-// Создание и настройка очереди и ексченджа Рэббита
-
-
-
 package com.exchangeinformant.feed.config;
 
+// Создание и настройка очереди и ексченджа Рэббита
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
