@@ -38,7 +38,7 @@ public class MessageController {
     }
 
     @Operation(summary = "Получение ленты для пользователя")
-    @GetMapping("/{id}/{rank}")
+    @GetMapping(value = {"/{id}/{rank}","/{id}"})
     public List<Message> getUsersFeed(@PathVariable long id, @PathVariable(required = false) Integer rank)
     {
         log.info("requested list for user {} ", id);
