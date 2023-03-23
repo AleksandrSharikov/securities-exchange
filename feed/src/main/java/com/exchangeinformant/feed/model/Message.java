@@ -50,8 +50,8 @@ public class Message {
     @Column(name = "type")
     private String type;
 
-    @Column(name =  "rank")
-    private int rank;
+    @Column(name =  "rank") // Важность сообщений, в моём представлении как параметр фильтрации, но у коллег есть сомнения
+    private int rank;       // относительно необходимости данного поля
 
     @Column(name = "data")  // May be it is better to store Object here
     private String data;

@@ -14,6 +14,8 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message,Long> {
 
+    // не нашёл способа выполнить два запроса в одном методе, по этому использовал два метода
+
 
     @Query("SELECT m FROM Message m WHERE m.userId = ?1 and m.unread= true and m.rank >= ?2")
     List<Message> messagesForUser(long id, int rank);
