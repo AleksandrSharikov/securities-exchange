@@ -1,48 +1,63 @@
 package com.example.notifier.service;
 
-import com.example.notifier.processor.UserInfoProcessor;
+import com.example.notifier.kafka.KafkaProducer;
+import com.example.notifier.model.Message;
+import com.example.notifier.model.User;
 import com.example.notifier.sender.EmailSender;
 import com.example.notifier.util.MapperJson;
 import com.example.notifier.util.MessageBuilder;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.Map;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class MessageService {
     private final TemplateService templateService;
-    private final MapperJson mapperJson;
+    private final MapperJson mapper;
     private final EmailSender emailSender;
-    private final UserInfoProcessor userInfoProcessor; //TODO перенести, здесь только для теста
+    private final Map<Long, LinkedList<String>> storageInMessageFromOtherServices;
+    private final KafkaProducer kafkaProducer;
+    private final LinkedList<User> storageUserInfo;
 
-    public MessageService(TemplateService templateService, MapperJson mapperJson, EmailSender emailSender, UserInfoProcessor userInfoProcessor) {
-        this.templateService = templateService;
-        this.mapperJson = mapperJson;
-        this.emailSender = emailSender;
-        this.userInfoProcessor = userInfoProcessor;
+    public void inMessageProcessor(String inMessage) {
+
+//        Задача для первого подписчика складывает все входящие в хранилище №1
+//        long userId = mapper.getUserId(inMessage);
+//        storageInMessageFromOtherServices.computeIfAbsent(userId, key -> new LinkedList<>()).add(inMessage);
+
+
+//        Задача для второго подписчика, который берет из хранилища №1 и отправляет запрос на user - profile
+//        if (!storageInMessageFromOtherServices.isEmpty()) {
+//            long userId = storageInMessageFromOtherServices.keySet().iterator().next();
+//            String requestToUserProfile = mapper.createJson("userId", userId);
+//            kafkaProducer.sendMessage("request-to-userProfile-from-notifier", requestToUserProfile);
+//        }
     }
 
-    /**
-     *
-     * Метод отправки сообщения пользователя, по установленным данным и выбранному способу отправки
-     */
     private void sendMessage(MessageBuilder messageBuilder) {
 //        emailSender.sendMessage(to, subject, textMessage);
-        log.info("Message to {} sent", messageBuilder.getRecipient());
+//        log.info("Message to {} sent", messageBuilder.getRecipient());
     }
 
-    /**
-     *
-     * Метод вызывает MessageBuilder для создания сообщения. Затем вызывает метод sendMessage().
-     */
-    public void messageManager(String jsonMessage) {
-        MessageBuilder messageBuilder = MessageBuilder.builder()
-                .template(templateService.getTemplateById(mapperJson.getTemplateId(jsonMessage)))
-                .serviceSender(mapperJson.getServiceSender(jsonMessage))
-                .subject(mapperJson.getSubjectMessage(jsonMessage))
-                .recipient(userInfoProcessor.getUserEmail(mapperJson.getUserId(jsonMessage)))
-                .data(mapperJson.mapperFromJsonToHashMap(jsonMessage))
-                .build();
-        sendMessage(messageBuilder);
+    public LinkedList<Message> messageManager(@NotNull User user) {
+        LinkedList<String> data = storageInMessageFromOtherServices.get(user.getId());
+        LinkedList<Message> messages = new LinkedList<>();
+        for (String json : data) {
+            MessageBuilder messageBuilder = MessageBuilder.builder()
+                    .template(templateService.getTemplateById(mapper.getTemplateId(json)))
+                    .serviceSender(mapper.getServiceSender(json))
+                    .subject(mapper.getSubjectMessage(json))
+                    .user(user)
+                    .data(mapper.mapperFromJsonToHashMap(json))
+                    .build();
+            messages.add(messageBuilder.newMessage());
+        }
+        return messages;
     }
 }

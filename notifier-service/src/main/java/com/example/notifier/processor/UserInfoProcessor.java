@@ -1,5 +1,6 @@
 package com.example.notifier.processor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Component;
  * Так как со стороны user-profile еще нет данного функционала, этот класс будет возвращать тестовые данные
  */
 @Component
+@Slf4j
 public class UserInfoProcessor {
-
     public String getUserEmail(long id) {
         return "westalex777@yandex.ru"; //TODO
     }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -48,5 +49,15 @@ public class MapperJson {
 
     public String getSubjectMessage(String json) {
         return getValueFromJson(json, "subject", String.class);
+    }
+
+    public String createJson(String nameField, long valueField) {
+        Map<String, Long> data = new HashMap<>();
+        data.put(nameField, valueField);
+        try {
+            return objectMapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -3,26 +3,14 @@ server:
 spring:
   application:
     name: notifier-service
+  kafka:
+    bootstrap-servers: localhost:9092
   cloud:
     config:
       profile: local
       discovery:
         enabled: false
         service-id: config-server
-    stream:
-      bindings:
-        messageInProcessor-in-0:
-          destination: create-json-test
-      kafka:
-        binder:
-          auto-add-partitions: true
-          brokers: localhost:9093
-      rabbit:
-        binder:
-          host: localhost
-          port: 5672
-          username: rm
-          password: rmp
   mail:
     host: smtp.yandex.ru
     port: 465
