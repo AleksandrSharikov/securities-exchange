@@ -3,6 +3,7 @@ package com.example.notifier.controller;
 import com.example.notifier.dto.TemplateDto;
 import com.example.notifier.model.Template;
 import com.example.notifier.service.TemplateService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/template")
+@AllArgsConstructor
 public class RestApiTemplate {
     private final TemplateService templateService;
 
-    public RestApiTemplate(TemplateService templateService) {
-        this.templateService = templateService;
-    }
-
-    //TODO добавить на контроллеры свагер, оперейшн, роли
+    // TODO добавить на контроллеры свагер, оперейшн, роли
     @GetMapping("{id}")
     public ResponseEntity<TemplateDto> getTemplate(@PathVariable long id) {
         return ResponseEntity.ok(new TemplateDto(templateService.getTemplateById(id)));

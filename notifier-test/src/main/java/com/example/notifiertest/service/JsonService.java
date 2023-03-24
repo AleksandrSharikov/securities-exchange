@@ -14,12 +14,12 @@ import java.util.Map;
 @Component
 @Slf4j
 public class JsonService {
-    private final KafkaProducer kafkaProducer;
+//    private final KafkaProducer kafkaProducer;
     private final LinkedList<String> jsonCreationEvents;
     private int i = 0;
 
-    public JsonService(KafkaProducer kafkaProducer, LinkedList<String> jsonCreationEvents) {
-        this.kafkaProducer = kafkaProducer;
+    public JsonService(LinkedList<String> jsonCreationEvents) {
+//        this.kafkaProducer = kafkaProducer;
         this.jsonCreationEvents = jsonCreationEvents;
     }
 
@@ -27,10 +27,10 @@ public class JsonService {
     public void generateJson() throws JsonProcessingException {
         i++;
         jsonCreationEvents.add(createJson());
-        if (jsonCreationEvents.peek() != null) {
-            kafkaProducer.sendMessage(i + jsonCreationEvents.peek());
-            log.info("outgoing: {}", i + jsonCreationEvents.poll());
-        }
+//        if (jsonCreationEvents.peek() != null) {
+//            kafkaProducer.sendMessage(i + jsonCreationEvents.peek());
+//            log.info("outgoing: {}", i + jsonCreationEvents.poll());
+//        }
     }
 
     private String createJson() throws JsonProcessingException {

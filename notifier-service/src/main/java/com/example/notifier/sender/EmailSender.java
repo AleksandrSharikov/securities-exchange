@@ -7,7 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-//TODO добавить в проверти файл параметры настоящей почты
+// TODO добавить в проверти файл параметры настоящей почты
 // и добавить описании класса
 @Service
 @Slf4j

@@ -24,6 +24,7 @@
         <module>paying-service</module>
         <module>gateway-service</module>
         <module>stub-payment</module>
+        <module>notifier-service</module>
     </modules>
     <properties>
         <java.version>17</java.version>

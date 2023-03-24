@@ -2,17 +2,16 @@ package com.example.notifier.service;
 
 import com.example.notifier.model.Template;
 import com.example.notifier.repository.TemplateRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class TemplateServiceImpl implements TemplateService {
     private final TemplateRepository templateRepository;
-    public TemplateServiceImpl(TemplateRepository templateRepository) {
-        this.templateRepository = templateRepository;
-    }
 
     @Transactional(readOnly = true)
     @Override

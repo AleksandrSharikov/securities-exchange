@@ -14,25 +14,10 @@ import java.util.Map;
 @Getter
 @Builder
 public class MessageBuilder {
-    /**
-     * Шаблон сообщения
-     */
     private final Template template;
-    /**
-     * Имя сервиса с помощью которого будет отправлено сообщение
-     */
     private final String serviceSender;
-    /**
-     * Коллекция data хранит все поля и их значения, которые требуется вставить в текст
-     */
     private final Map<String, String> data;
-    /**
-     * Тема сообщения
-     */
     private final String subject; // TODO возможно тему надо хранить в БД шаблонов
-    /**
-     * Получатель сообщения
-     */
     private final User user;
 
     /**
