@@ -1,11 +1,14 @@
 package com.example.notifier.model;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class User {
     private long id;
-    private String name;
     private String email;
     private String phone;
 }

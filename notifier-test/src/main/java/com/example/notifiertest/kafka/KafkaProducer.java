@@ -1,4 +1,4 @@
-package com.example.notifiertest.processor;
+package com.example.notifiertest.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,14 +9,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
-    @Value("to-notifier")
-    private String topicName;
+//    @Value("to-notifier")
+//    private String topicName;
 
     public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(String message) {
+    public void sendMessage(String topicName, String key, String message) {
+        kafkaTemplate.send(topicName, key, message);
+    }
+
+    public void sendMessage(String topicName, String message) {
         kafkaTemplate.send(topicName, message);
     }
 }

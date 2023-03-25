@@ -4,7 +4,6 @@ import com.example.notifier.model.Template;
 import lombok.*;
 
 @Data
-@Builder
 public class TemplateDto {
     Long id;
     String text;
