@@ -2,6 +2,7 @@ package com.example.notifier.kafka;
 
 import com.example.notifier.config.ObjectFactoryBean;
 import com.example.notifier.processor.MessageManager;
+import com.example.notifier.sender.EmailSender;
 import com.example.notifier.service.MessageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class ListenerKafka {
     private MessageService messageService;
     private final ObjectFactoryBean objectFactoryBean;
     private final Map<String, String> storageInMessageFromOtherServices;
+    private final EmailSender emailSender;
 
     @KafkaListener(id = "fromOtherForSendMessage", topics = "to-notifier")
     public void fromOtherForSendMessage(String inMessage) {
@@ -38,6 +40,6 @@ public class ListenerKafka {
                     MessageManager messageManager = objectFactoryBean.getMessageManager();
                     return messageManager.apply(value, storageInMessageFromOtherServices.get(key));
                 })
-                .subscribe(System.out::println);
+                .subscribe(x -> emailSender.sendMessage("ЕМЕЙЛ МОЖНО НАПИСАТЬ ЗДЕСЬ!", x.getSubject(), x.getText()));
     }
 }
