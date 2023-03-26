@@ -22,7 +22,14 @@ public class ObjectFactoryBean {
 
     @Bean("storage-inMessageFromOtherServices")
     public Map<String, IncomingMessage> createStorageInMessageFromOtherServices() {
-        return new HashMap<>();
+        return new HashMap<>() {
+            @Override
+            public IncomingMessage get(Object key) {
+                IncomingMessage incomingMessage = super.get(key);
+                super.remove(key);
+                return incomingMessage;
+            }
+        };
     }
 
     @Bean

@@ -76,16 +76,4 @@ public class JsonService {
             throw new RuntimeException(e);
         }
     }
-
-//    private String createJson() throws JsonProcessingException {
-//        Map<String, Object> data = new HashMap<>();
-//        data.put("userId", 1);
-//        data.put("templateId", 1);
-//        data.put("serviceSend", "Email");
-//        data.put("name", "Alex");
-//        data.put("number_order", "1000100");
-//        data.put("date_delivery", "11 04 2023");
-//        data.put("subject", "Test subject");
-//        return objectMapper.writeValueAsString(data);
-//    }
 }

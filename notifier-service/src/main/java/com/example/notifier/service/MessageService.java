@@ -25,18 +25,16 @@ public class MessageService {
         return String.valueOf(random.nextInt());
     }
 
-    public void rederictToUserProfile(String message) {
+    public void incomingMessageProcessor(String message) throws JsonProcessingException {
         String key = generationKey();
-        User user = null;
-        try {
-            IncomingMessage incomingMessage = objectMapper.readValue(message, IncomingMessage.class);
-            user = User.builder().id(incomingMessage.getUserId()).build();
-            storageInMessageFromOtherServices.put(key, incomingMessage);
-            kafkaProducer.sendMessage("request-to-userProfile-from-notifier", key, objectMapper.writeValueAsString(user));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        } finally {
-            log.info("outgoing to user-profile -> key: {}, value: {}", key, user);
-        }
+        IncomingMessage incomingMessage = objectMapper.readValue(message, IncomingMessage.class);
+        User user = User.builder().id(incomingMessage.getUserId()).build();
+        storageInMessageFromOtherServices.put(key, incomingMessage);
+        requestToUserProfile(user, key);
+    }
+
+    public void requestToUserProfile(User user, String key) throws JsonProcessingException {
+        kafkaProducer.sendMessage("request-to-userProfile-from-notifier", key, objectMapper.writeValueAsString(user));
+        log.info("outgoing to user-profile -> key: {}, value: {}", key, user);
     }
 }

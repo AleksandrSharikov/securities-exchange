@@ -4,6 +4,7 @@ import com.example.notifier.config.ObjectFactoryBean;
 import com.example.notifier.model.IncomingMessage;
 import com.example.notifier.sender.EmailSender;
 import com.example.notifier.service.MessageService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -24,9 +25,9 @@ public class ListenerKafka {
     private final EmailSender emailSender;
 
     @KafkaListener(id = "fromOtherForSendMessage", topics = "to-notifier")
-    public void fromOtherForSendMessage(String inMessage) {
+    public void fromOtherForSendMessage(String inMessage) throws JsonProcessingException {
         log.info("incoming: " + inMessage);
-        messageService.rederictToUserProfile(inMessage);
+        messageService.incomingMessageProcessor(inMessage);
     }
 
     @KafkaListener(id = "responseFromUserProfileToNotifier", topics = "response-userProfile-to-notifier")
