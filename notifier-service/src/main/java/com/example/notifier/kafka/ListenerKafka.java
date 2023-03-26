@@ -37,10 +37,7 @@ public class ListenerKafka {
         log.info("incoming message from User-Profile -> key: {}, value: {}", key, value);
         Flux.just(value)
                 .publishOn(Schedulers.boundedElastic())
-                .map(x -> {
-                    MessageManager messageManager = objectFactoryBean.getMessageManager();
-                    return messageManager.apply(value, storageInMessageFromOtherServices.get(key));
-                })
+                .map(x -> objectFactoryBean.getMessageManager().apply(x, storageInMessageFromOtherServices.get(key)))
                 .subscribe(x -> emailSender.sendMessage("westalex777@yandex.ru", x.getSubject(), x.getText()));
     }
 }
