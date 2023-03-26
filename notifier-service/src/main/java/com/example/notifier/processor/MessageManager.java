@@ -4,7 +4,6 @@ import com.example.notifier.function.TriFunction;
 import com.example.notifier.model.IncomingMessage;
 import com.example.notifier.model.Message;
 import com.example.notifier.model.User;
-import com.example.notifier.util.MessageBuilder;
 import com.example.notifier.service.TemplateService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

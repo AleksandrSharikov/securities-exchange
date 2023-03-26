@@ -1,4 +1,4 @@
-package com.example.notifier.util;
+package com.example.notifier.processor;
 
 import com.example.notifier.model.Message;
 import com.example.notifier.model.Template;
