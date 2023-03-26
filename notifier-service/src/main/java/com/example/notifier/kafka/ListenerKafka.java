@@ -2,7 +2,6 @@ package com.example.notifier.kafka;
 
 import com.example.notifier.config.ObjectFactoryBean;
 import com.example.notifier.model.IncomingMessage;
-import com.example.notifier.processor.MessageManager;
 import com.example.notifier.sender.EmailSender;
 import com.example.notifier.service.MessageService;
 import lombok.AllArgsConstructor;

@@ -3,6 +3,9 @@ package com.example.notifier.model;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Message - модель готового сообщения для отправки пользователю.
+ */
 @Data
 @Builder
 public class Message {

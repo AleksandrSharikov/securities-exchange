@@ -4,6 +4,10 @@ import lombok.*;
 
 import java.util.Map;
 
+/**
+ * IncomingMessage - модель сообщения, которое принимает Notifier от других сервис для отправки сообщения пользователю.
+ * Данное сообщение принимается брокером сообщений.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
