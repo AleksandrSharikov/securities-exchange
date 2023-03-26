@@ -1,6 +1,7 @@
 package com.example.notifier.kafka;
 
 import com.example.notifier.config.ObjectFactoryBean;
+import com.example.notifier.model.IncomingMessage;
 import com.example.notifier.processor.MessageManager;
 import com.example.notifier.sender.EmailSender;
 import com.example.notifier.service.MessageService;
@@ -18,9 +19,9 @@ import java.util.Map;
 @Slf4j
 @AllArgsConstructor
 public class ListenerKafka {
-    private MessageService messageService;
+    private final MessageService messageService;
     private final ObjectFactoryBean objectFactoryBean;
-    private final Map<String, String> storageInMessageFromOtherServices;
+    private final Map<String, IncomingMessage> storageInMessageFromOtherServices;
     private final EmailSender emailSender;
 
     @KafkaListener(id = "fromOtherForSendMessage", topics = "to-notifier")
@@ -40,6 +41,6 @@ public class ListenerKafka {
                     MessageManager messageManager = objectFactoryBean.getMessageManager();
                     return messageManager.apply(value, storageInMessageFromOtherServices.get(key));
                 })
-                .subscribe(x -> emailSender.sendMessage("ЕМЕЙЛ МОЖНО НАПИСАТЬ ЗДЕСЬ!", x.getSubject(), x.getText()));
+                .subscribe(x -> emailSender.sendMessage("westalex777@yandex.ru", x.getSubject(), x.getText()));
     }
 }

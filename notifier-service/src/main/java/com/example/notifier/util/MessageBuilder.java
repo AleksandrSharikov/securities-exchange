@@ -14,7 +14,7 @@ import java.util.Map;
 public class MessageBuilder {
     private Template template;
     private String serviceSender;
-    private Map<String, Object> data;
+    private Map<String, String> texts;
     private String subject; // TODO возможно тему надо хранить в БД шаблонов
     private User user;
 
@@ -23,8 +23,8 @@ public class MessageBuilder {
      */
     private String createTextMessage() {
         String textTemplate = template.getText();
-        for (String key : data.keySet()) {
-            textTemplate = textTemplate.replace("${" + key + "}", data.get(key).toString());
+        for (String key : texts.keySet()) {
+            textTemplate = textTemplate.replace("${" + key + "}", texts.get(key));
         }
         return textTemplate;
     }

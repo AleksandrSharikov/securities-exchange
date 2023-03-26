@@ -1,6 +1,7 @@
 package com.example.notifiertest.service;
 
 import com.example.notifiertest.kafka.KafkaProducer;
+import com.example.notifiertest.model.IncomingMessage;
 import com.example.notifiertest.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -35,9 +36,9 @@ public class JsonService {
 
     public String responseToNotifier(String message) {
         try {
-            JsonNode jsonNode = objectMapper.readTree(message);
-            long userId = jsonNode.get("userId").asLong();
-            return objectMapper.writeValueAsString(getUserById(userId));
+            User user = objectMapper.readValue(message, User.class);
+            user = getUserById(user.getId());
+            return objectMapper.writeValueAsString(user);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -55,15 +56,36 @@ public class JsonService {
         log.info("outgoing: {}", i);
     }
 
-    private String createJson() throws JsonProcessingException {
-        Map<String, Object> data = new HashMap<>();
-        data.put("userId", 1);
-        data.put("templateId", 1);
-        data.put("serviceSend", "Email");
-        data.put("name", "Alex");
-        data.put("number_order", "1000100");
-        data.put("date_delivery", "11 04 2023");
-        data.put("subject", "Test subject");
-        return objectMapper.writeValueAsString(data);
+    private String createJson() {
+        Map<String, String> texts = new HashMap<>();
+        texts.put("name", "Alex");
+        texts.put("number_order", "1000100");
+        texts.put("date_delivery", "11 04 2023");
+
+        IncomingMessage message = IncomingMessage.builder()
+                .userId(1)
+                .templateId(1)
+                .serviceSender("Email")
+                .subject("Test subject")
+                .texts(texts)
+                .build();
+
+        try {
+            return objectMapper.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+//    private String createJson() throws JsonProcessingException {
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("userId", 1);
+//        data.put("templateId", 1);
+//        data.put("serviceSend", "Email");
+//        data.put("name", "Alex");
+//        data.put("number_order", "1000100");
+//        data.put("date_delivery", "11 04 2023");
+//        data.put("subject", "Test subject");
+//        return objectMapper.writeValueAsString(data);
+//    }
 }

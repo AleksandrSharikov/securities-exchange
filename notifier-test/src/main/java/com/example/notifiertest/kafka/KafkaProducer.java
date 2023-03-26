@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
-//    @Value("to-notifier")
-//    private String topicName;
 
     public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;

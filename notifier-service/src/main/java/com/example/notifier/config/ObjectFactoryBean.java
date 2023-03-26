@@ -1,5 +1,6 @@
 package com.example.notifier.config;
 
+import com.example.notifier.model.IncomingMessage;
 import com.example.notifier.processor.MessageManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class ObjectFactoryBean {
     }
 
     @Bean("storage-inMessageFromOtherServices")
-    public Map<String, String> createStorageInMessageFromOtherServices() {
+    public Map<String, IncomingMessage> createStorageInMessageFromOtherServices() {
         return new HashMap<>();
     }
 
