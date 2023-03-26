@@ -1,6 +1,6 @@
 package com.example.notifier.processor;
 
-import com.example.notifier.function.ThreeFunction;
+import com.example.notifier.function.TriFunction;
 import com.example.notifier.model.IncomingMessage;
 import com.example.notifier.model.Message;
 import com.example.notifier.model.User;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @AllArgsConstructor
-public class MessageManager implements ThreeFunction<Message, String, IncomingMessage> {
+public class MessageManager implements TriFunction<Message, String, IncomingMessage> {
     private final ObjectMapper objectMapper;
     private final TemplateService templateService;
 
