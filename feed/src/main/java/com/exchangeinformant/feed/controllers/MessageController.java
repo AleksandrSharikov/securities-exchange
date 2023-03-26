@@ -2,9 +2,9 @@ package com.exchangeinformant.feed.controllers;
 
 //Конотроллеры
 
-import com.exchangeinformant.feed.DTO.MessageDTO;
+import com.exchangeinformant.feed.dto.MessageInDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;
-import com.exchangeinformant.feed.model.Message;
+import com.exchangeinformant.feed.dto.MessageOutDTO;
 import com.exchangeinformant.feed.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,16 +32,16 @@ public class MessageController {
 
     @Operation(summary = "Контроллер для отправки сообщений в очередь с целью тестирования")
     @PostMapping("/publish")
-    public String publishMessage(@RequestBody MessageDTO messageDTO) {
+    public String publishMessage(@RequestBody MessageInDTO messageInDTO) {
 
-        template.convertAndSend(RabbitConfig.EXCHANGE, RabbitConfig.KEY, messageDTO);
+        template.convertAndSend(RabbitConfig.EXCHANGE, RabbitConfig.KEY, messageInDTO);
         log.info("get something");
         return "Message Published";
     }
 
     @Operation(summary = "Получение ленты для пользователя с определённым id и минимальным rank")
     @GetMapping(value = {"/{id}/{rank}","/{id}"})
-    public List<Message> getUsersFeed(@PathVariable long id, @PathVariable(required = false) Integer rank)
+    public List<MessageOutDTO> getUsersFeed(@PathVariable long id, @PathVariable(required = false) Integer rank)
     {
         log.info("requested list for user {} ", id);
         return rank == null ? messageService.unreadMessageList(id) : messageService.unreadMessageList(id,rank);

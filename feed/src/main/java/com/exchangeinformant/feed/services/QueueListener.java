@@ -4,7 +4,7 @@ package com.exchangeinformant.feed.services;
 // Слушатель входной очереди
 
 
-import com.exchangeinformant.feed.DTO.MessageDTO;
+import com.exchangeinformant.feed.dto.MessageInDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class QueueListener {
     }
 
     @RabbitListener(queues = RabbitConfig.QUEUE)
-    public void listener(MessageDTO message) {
+    public void listener(MessageInDTO message) {
         log.info("Message \" {} \" received by listener", message);
         messageService.receiveMessage(message);
     }

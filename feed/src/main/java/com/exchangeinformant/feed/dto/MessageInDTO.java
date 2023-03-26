@@ -1,4 +1,4 @@
-package com.exchangeinformant.feed.DTO;
+package com.exchangeinformant.feed.dto;
 
 // Сообщение получаемое с других сервисов
 
@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class MessageDTO {
+public class MessageInDTO {
     @Schema(description = "id адресата сообщения")
     private long userId;
 

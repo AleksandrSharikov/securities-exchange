@@ -2,7 +2,7 @@ package com.exchangeinformant.feed.model;
 
 // Сообщение для хранения в БД
 
-import com.exchangeinformant.feed.DTO.MessageDTO;
+import com.exchangeinformant.feed.dto.MessageInDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +20,11 @@ import java.time.LocalDateTime;
 @ToString
 public class Message {
 
-    public Message(MessageDTO messageDTO){
+    public Message(MessageInDTO messageInDTO){
         this();
-        this.userId = messageDTO.getUserId();
-        this.sourceId = messageDTO.getSourceId();
-        this.data = messageDTO.getData();
+        this.userId = messageInDTO.getUserId();
+        this.sourceId = messageInDTO.getSourceId();
+        this.data = messageInDTO.getData();
         this.rank = 2;
         this.unread = true;
 
@@ -44,11 +44,11 @@ public class Message {
     @Column(name = "time")
     private LocalDateTime receivingTime;
 
-    @Column(name = "source")
+    @Column(name = "source_id")
     private int sourceId;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "type_id")
+    private int type_id;
 
     @Column(name =  "rank") // Важность сообщений, в моём представлении как параметр фильтрации, но у коллег есть сомнения
     private int rank;       // относительно необходимости данного поля

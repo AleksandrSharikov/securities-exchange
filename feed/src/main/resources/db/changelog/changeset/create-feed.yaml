@@ -29,13 +29,13 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: source  # change to source_id
+                  name: source_id
                   type: int
                   constraints:
                     nullable: false
               - column:
-                  name: type
-                  type: varchar(25)
+                  name: type_id
+                  type: int
                   constraints:
                     nullable: true
               - column:
