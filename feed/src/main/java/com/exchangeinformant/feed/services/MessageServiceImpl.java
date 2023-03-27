@@ -19,6 +19,7 @@ import java.util.List;
 @Service
 public class MessageServiceImpl implements MessageService {
 
+
     private final MessageRepository messageRepository;
     private final SourceRepository sourceRepository;
     private final MessageMapperImpl messageMapper;
@@ -56,14 +57,12 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageOutDTO> unreadMessageList(long userId, int rank) {
-        List<Message> messages = messageRepository.messagesForUser(userId, rank);
+        List<Message> messages = messageRepository.messagesForUser(userId, rank, MessageRepository.pageable);
         List<MessageOutDTO> answer = new ArrayList<>();
         for(Message message : messages) {
             answer.add(messageMapper.messageToTdo(message));
+            messageRepository.markRead(message.getId());
         }
-
-        messageRepository.markListRead(userId, rank);
-    return answer;
-
+        return answer;
     }
 }

@@ -35,11 +35,11 @@ public class SaveMessageTest implements ApplicationRunner {
 
 
         Message message = new Message(
-                null,5L, true, LocalDateTime.now(),1, 1,2,"data,test,5");
+                null,5L, true, LocalDateTime.now(),1, 1,2,"data1,test1,1");
         messageRepository.save(message);
 
         message = new Message(
-                null,5L, true, LocalDateTime.now(),1, 1,2,"data2,test2,7");
+                null,5L, true, LocalDateTime.now(),1, 1,2,"data2,test2,2");
         messageRepository.save(message);
 
         message = new Message(
@@ -47,16 +47,16 @@ public class SaveMessageTest implements ApplicationRunner {
         messageRepository.save(message);
 
         message = new Message(
-                null,5L, true, LocalDateTime.now(),1, 1,2,"data4,test4,7");
+                null,5L, true, LocalDateTime.now(),1, 1,2,"data4,test4,4");
         messageRepository.save(message);
 
         message = new Message(
-                null,5L, false, LocalDateTime.now(),1, 1,2,"data5,test2,7");
+                null,5L, false, LocalDateTime.now(),1, 1,2,"data5,test5,5");
         messageRepository.save(message);
 
 
         message = new Message(
-                null,5L, true, LocalDateTime.now(),1, 1,1,"data6,rank1,7");
+                null,5L, true, LocalDateTime.now(),1, 1,1,"data6,rank1,6");
         messageRepository.save(message);
 
 
