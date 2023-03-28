@@ -8,6 +8,8 @@ import com.exchangeinformant.feed.repository.PatternRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.MissingFormatArgumentException;
+
 @Service
 public class MessageMapperImpl {
     private final PatternRepository patternRepository;
@@ -19,9 +21,14 @@ public class MessageMapperImpl {
     public MessageOutDTO  messageToTdo(Message  message) {
 
         if(patternRepository.existsById(message.getType_id())) {
+            try {
             String[] datas = message.getData().split(",");
             return new MessageOutDTO(String.format(patternRepository.getReferenceById(message.getType_id()).getPattern(), datas));
+            } catch(MissingFormatArgumentException mfae) {
+                return new MessageOutDTO(message.getData() + " <- WRONG FORMAT!");
+            }
         }
+
 
         return new MessageOutDTO(message.getData());
     }

@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message,Long> {
 
-    Pageable pageable = PageRequest.of(0, 5, Sort.by("receivingTime"));
+    Pageable pageable = PageRequest.of(0, 5, Sort.by("receivingTime").descending());
 
     // не нашёл способа выполнить два запроса в одном методе, по этому использовал два метода
 
