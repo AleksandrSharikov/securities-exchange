@@ -38,14 +38,18 @@ public class MessageServiceImpl implements MessageService {
         Message message = new Message(messageInDTO);
         message.setReceivingTime(LocalDateTime.now());
         message.setUnread(true);
-        setRank(message);
+     //   setRank(message);
         log.info("MessageDTO translated to message  \" {} \" and prepared to save", message);
         messageRepository.save(message);
         log.info("Message has been processed");
     }
 
     void setRank(Message message) {
-        message.setRank(sourceRepository.getReferenceById(message.getSourceId()).getDefaultRank());
+        System.out.println(1);
+        if(sourceRepository.existsById(message.getSourceId())) {
+            System.out.println(2);
+            message.setRank(sourceRepository.getReferenceById(message.getSourceId()).getDefaultRank());
+        }
 
     }
 

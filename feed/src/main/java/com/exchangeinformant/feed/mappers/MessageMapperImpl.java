@@ -20,7 +20,7 @@ public class MessageMapperImpl {
 
         if(patternRepository.existsById(message.getType_id())) {
             String[] datas = message.getData().split(",");
-            return new MessageOutDTO(String.format(patternRepository.getReferenceById(message.getType_id()).getPatern(), datas));
+            return new MessageOutDTO(String.format(patternRepository.getReferenceById(message.getType_id()).getPattern(), datas));
         }
 
         return new MessageOutDTO(message.getData());

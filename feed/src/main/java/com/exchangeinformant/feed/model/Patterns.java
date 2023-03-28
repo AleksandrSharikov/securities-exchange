@@ -22,5 +22,5 @@ public class Patterns {
     String type;
 
     @Column(name = "pattern")
-    String patern;
+    String pattern;
 }
