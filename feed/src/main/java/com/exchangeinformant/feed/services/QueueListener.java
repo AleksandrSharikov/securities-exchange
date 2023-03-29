@@ -1,9 +1,6 @@
 package com.exchangeinformant.feed.services;
 
 
-// Слушатель входной очереди
-
-
 import com.exchangeinformant.feed.dto.MessageInDTO;
 import com.exchangeinformant.feed.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +12,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 @Component
 public class QueueListener {
 
-
+    // Слушатель входной очереди
     private final MessageService messageService;
 
     @Autowired
@@ -23,6 +20,7 @@ public class QueueListener {
         this.messageService = messageService;
     }
 
+    // Получение сообщения и отправка его в сервис для сохранения в БД
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public void listener(MessageInDTO message) {
         log.info("Message \" {} \" received by listener", message);

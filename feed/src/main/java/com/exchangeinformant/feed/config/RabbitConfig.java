@@ -1,6 +1,5 @@
 package com.exchangeinformant.feed.config;
 
-// Создание и настройка очереди и ексченджа Рэббита
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -12,11 +11,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
+    // Создание и настройка очереди и ексченджа Рэббита
 
-    public static final String KEY = "message_key";
-    public static final String QUEUE = "message_queue";
-    public static final String EXCHANGE = "message_exchange";
+    public static final String KEY = "message_key";  // Ключ
+    public static final String QUEUE = "message_queue";  // Имя очереди
+    public static final String EXCHANGE = "message_exchange";    // Распределитель
 
+    // Создание очереди распределителя и их связь
     @Bean
     public Queue queue() {
         return new Queue(QUEUE);

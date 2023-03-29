@@ -1,9 +1,5 @@
 package com.exchangeinformant.feed.config;
 
-
-// Тестовый класс для заполнения БД при старте в целях тестирования
-
-
 import com.exchangeinformant.feed.model.Message;
 import com.exchangeinformant.feed.model.Patterns;
 import com.exchangeinformant.feed.repository.MessageRepository;
@@ -18,6 +14,7 @@ import java.time.LocalDateTime;
 @Component
 public class SaveMessageTest implements ApplicationRunner {
 
+    // Тестовый класс для заполнения БД при старте в целях тестирования
     private final MessageRepository messageRepository;
     private final PatternRepository patternRepository;
     @Autowired
@@ -28,13 +25,20 @@ public class SaveMessageTest implements ApplicationRunner {
     }
     @Override
     public void run(ApplicationArguments args) throws Exception {
-            Patterns patternTest =  new Patterns(
+
+        // Добавляет в БД шаблон для тестирования для тестирования
+        Patterns patternTest =  new Patterns(
                 1, "Test pattern", "Первая информация: %1$s, вторая: %2$s");
         patternRepository.save(patternTest);
 
+        // Добавляет сообещение для тестов в момент старта сервиса
         Message message = new Message(
                 null,5L, true, LocalDateTime.now(),1, 1,3,"data7fsd");
         messageRepository.save(message);
+
+
+        // Сделать все сообщения непрочитанными, кроме специально прочитанного
+        messageRepository.makeAllUnread();
 
 
     }

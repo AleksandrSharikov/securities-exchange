@@ -14,13 +14,17 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "text_patterns")
 public class Patterns {
+
+    // База шаблонов для сообщений
     @Id
     @Column(name = "type_id")
     int id;
 
+// Просто название сообщений такого типа
     @Column(name = "type")
     String type;
 
+// Шаблон для String.format
     @Column(name = "pattern")
     String pattern;
 }

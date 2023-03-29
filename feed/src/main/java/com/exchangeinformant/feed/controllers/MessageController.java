@@ -35,7 +35,7 @@ public class MessageController {
     public String publishMessage(@RequestBody MessageInDTO messageInDTO) {
 
         template.convertAndSend(RabbitConfig.EXCHANGE, RabbitConfig.KEY, messageInDTO);
-        log.info("get something");
+        log.info("Post controller get something");
         return "Message Published";
     }
 

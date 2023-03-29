@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PatternRepository extends JpaRepository<Patterns,Integer> {
+    // Репозиторий для шаблонов
 }
