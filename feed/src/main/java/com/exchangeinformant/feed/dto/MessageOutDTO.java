@@ -10,8 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Schema(name = "Выходное сообщение",description = "Сообщение передаваемое на ленту")
+@Schema(name = "Выходное сообщение", description = "Сообщение передаваемое на ленту")
 public class MessageOutDTO {
     @Schema(description = "Непосредственно подготовленное сообщение")
     private String message;
+
 }

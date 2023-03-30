@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class CardRestControllerTest extends IntegrationTestBase {
 
     @Autowired
@@ -29,7 +29,7 @@ class CardRestControllerTest extends IntegrationTestBase {
     @Test
     @DisplayName("Should get card by id")
     void shouldGetCard() throws Exception {
-        mockMvc.perform(get("/api/cards/{id}", 1))
+        mockMvc.perform(get("/api/cards/{id}", 3))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
