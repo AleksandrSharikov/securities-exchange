@@ -18,13 +18,14 @@ public class Template {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    Long id;
+    @NonNull
+    private Long id;
 
     @Column
-    String text;
+    @NonNull
+    private String subject;
 
-    public Template(TemplateDto templateDto) {
-        this.id = templateDto.getId();
-        this.text = templateDto.getText();
-    }
+    @Column
+    @NonNull
+    private String text;
 }

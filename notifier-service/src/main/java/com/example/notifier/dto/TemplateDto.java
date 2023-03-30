@@ -1,15 +1,12 @@
 package com.example.notifier.dto;
 
-import com.example.notifier.model.Template;
 import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TemplateDto {
     Long id;
+    private String subject;
     String text;
-
-    public TemplateDto(Template template) {
-        this.id = template.getId();
-        this.text = template.getText();
-    }
 }

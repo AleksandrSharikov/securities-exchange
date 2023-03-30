@@ -28,4 +28,3 @@ spring:
           auth: true
           ssl:
             trust: smtp.yandex.ru
-limit_retry_for_sender_service: 3

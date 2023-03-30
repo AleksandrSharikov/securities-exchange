@@ -3,21 +3,25 @@ package com.example.notifier.service;
 import com.example.notifier.model.Template;
 import com.example.notifier.repository.TemplateRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class TemplateServiceImpl implements TemplateService {
     private final TemplateRepository templateRepository;
 
     @Transactional(readOnly = true)
     @Override
     public Template getTemplateById(long id) {
-        return templateRepository.findTemplateById(id);
-    }
+        return templateRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException(String.format("Template with ID %s not found", id)));
+}
 
     @Transactional(readOnly = true)
     @Override

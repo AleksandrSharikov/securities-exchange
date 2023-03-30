@@ -17,7 +17,7 @@ public class ConfigEventSource {
     @Bean("Users-for-test")
     public List<User> createListUsers() {
         return new ArrayList<>(Arrays.asList(
-                new User(1, "email_1_@email.ru", "+7 777 777 77 01"),
+                new User(1, "westalex777@yandex.ru", "+7 777 777 77 01"),
                 new User(2, "email_2_@email.ru", "+7 777 777 77 02"),
                 new User(3, "email_3_@email.ru", "+7 777 777 77 03"),
                 new User(4, "email_4_@email.ru", "+7 777 777 77 04"),

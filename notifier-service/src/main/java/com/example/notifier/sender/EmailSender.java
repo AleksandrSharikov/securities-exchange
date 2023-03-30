@@ -1,16 +1,18 @@
 package com.example.notifier.sender;
 
+import com.example.notifier.model.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-// TODO добавить в проверти файл параметры настоящей почты
-// и добавить описании класса
+/**
+ * EmailSender использует библиотеку org.springframework.mail.javamail.JavaMailSender для отправки сообщений на емейл.
+ */
 @Service
 @Slf4j
-public class EmailSender {
+public class EmailSender implements Sender {
     private final JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
@@ -20,13 +22,14 @@ public class EmailSender {
         this.mailSender = mailSender;
     }
 
-    public void sendMessage(String to, String subject, String text) {
+    @Override
+    public void sendMessage(Message message) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(text);
+        simpleMailMessage.setTo(message.getToEmail());
+        simpleMailMessage.setSubject(message.getSubject());
+        simpleMailMessage.setText(message.getText());
         simpleMailMessage.setFrom(from);
         mailSender.send(simpleMailMessage);
-        log.info("Email from {} to {} sent", from, to);
+        log.info("Email from {} to {} SENT", from, message.getToEmail());
     }
 }

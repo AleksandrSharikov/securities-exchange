@@ -13,9 +13,13 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Конфигурационный файл для продюсера Apache Kafka. С его помощью можно отправлять сообщения в указанный топик.
+ */
 @Configuration
 @PropertySource("classpath:application.yaml")
-public class KafkaConfig {
+//@EnableKafka
+public class KafkaConfiguration {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;

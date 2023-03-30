@@ -1,10 +1,11 @@
 package com.example.notifiertest.service;
 
-import com.example.notifiertest.kafka.KafkaProducer;
+import com.example.notifiertest.kafka.KafkaProducerTest;
 import com.example.notifiertest.model.IncomingMessage;
 import com.example.notifiertest.model.User;
+import com.example.notifiertest.processor.KafkaTest;
+import com.example.notifiertest.processor.KafkaTest1;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,19 +18,19 @@ import java.util.Map;
 @Component
 @Slf4j
 public class JsonService {
-    private final KafkaProducer kafkaProducer;
+    private final KafkaProducerTest kafkaProducerTest;
     private final List<User> listUsers;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private int i = 0;
 
-    public JsonService(KafkaProducer kafkaProducer, List<User> listUsers) {
-        this.kafkaProducer = kafkaProducer;
+    public JsonService(KafkaProducerTest kafkaProducerTest, List<User> listUsers) {
+        this.kafkaProducerTest = kafkaProducerTest;
         this.listUsers = listUsers;
     }
 
     public void response(String key, String message) {
         String json = responseToNotifier(message);
-        kafkaProducer.sendMessage("response-userProfile-to-notifier", key, json);
+        kafkaProducerTest.sendMessage("response-userProfile-to-notifier", key, json);
         log.info("outgoing response to notifier -> key: {}, value: {}", key, json);
 
     }
@@ -49,10 +50,10 @@ public class JsonService {
     }
 
     @Scheduled(fixedRate = 5000)
-    public void generateJson() throws JsonProcessingException {
+    public void generateJson() {
         i++;
         String json = createJson();
-        kafkaProducer.sendMessage("to-notifier", json);
+        kafkaProducerTest.sendMessage("to-notifier", json);
         log.info("outgoing: {}", i);
     }
 
@@ -63,13 +64,12 @@ public class JsonService {
         texts.put("date_delivery", "11 04 2023");
 
         IncomingMessage message = IncomingMessage.builder()
-                .userId(1)
+                .userId(1L)
                 .templateId(1)
                 .serviceSender("Email")
                 .subject("Test subject")
                 .texts(texts)
                 .build();
-
         try {
             return objectMapper.writeValueAsString(message);
         } catch (JsonProcessingException e) {

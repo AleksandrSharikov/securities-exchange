@@ -8,7 +8,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class IncomingMessage {
-    private long userId;
+    private Long userId;
     private long templateId;
     private String serviceSender;
     private String subject;

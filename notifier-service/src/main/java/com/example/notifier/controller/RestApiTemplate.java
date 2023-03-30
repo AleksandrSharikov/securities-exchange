@@ -1,6 +1,7 @@
 package com.example.notifier.controller;
 
 import com.example.notifier.dto.TemplateDto;
+import com.example.notifier.mapper.TemplateMapper;
 import com.example.notifier.model.Template;
 import com.example.notifier.service.TemplateService;
 import lombok.AllArgsConstructor;
@@ -20,28 +21,26 @@ public class RestApiTemplate {
     // TODO добавить на контроллеры свагер, оперейшн, роли
     @GetMapping("{id}")
     public ResponseEntity<TemplateDto> getTemplate(@PathVariable long id) {
-        return ResponseEntity.ok(new TemplateDto(templateService.getTemplateById(id)));
+        return ResponseEntity.ok(TemplateMapper.INSTANCE.templateToDto(templateService.getTemplateById(id)));
     }
 
     @GetMapping
     public ResponseEntity<List<TemplateDto>> getAllTemplate() {
-        return ResponseEntity.ok(templateService.getAllTemplate().stream()
-                .map(TemplateDto::new)
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(TemplateMapper.INSTANCE.templatesToDto(templateService.getAllTemplate()));
     }
 
     @PostMapping
     public ResponseEntity<TemplateDto> addTemplate(@RequestBody TemplateDto templateDto) {
-        Template template = new Template(templateDto);
+        Template template = TemplateMapper.INSTANCE.templateFromDto(templateDto);
         templateService.saveTemplate(template);
-        return ResponseEntity.ok(new TemplateDto(template));
+        return ResponseEntity.ok(TemplateMapper.INSTANCE.templateToDto(template));
     }
 
     @PutMapping
     public ResponseEntity<TemplateDto> updateTemplate(@RequestBody TemplateDto templateDto) {
-        Template template = new Template(templateDto);
+        Template template = TemplateMapper.INSTANCE.templateFromDto(templateDto);
         templateService.saveTemplate(template);
-        return ResponseEntity.ok(new TemplateDto(template));
+        return ResponseEntity.ok(TemplateMapper.INSTANCE.templateToDto(template));
     }
 
     @DeleteMapping("{id}")
