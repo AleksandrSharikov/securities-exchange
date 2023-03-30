@@ -6,19 +6,19 @@ databaseChangeLog:
         - createTable:
             tableName: text_patterns
             columns:
-                         - column:
-                             name: type_id
-                             type: int
-                             constraints:
-                               primaryKey: true
-                               nullable: false
-                         - column:
-                             name: type
-                             type: varchar(25)
-                             constraints:
-                               nullable: true
-                         - column:
-                             name: pattern
-                             type: varchar(150)
-                             constraints:
-                               nullable: false
+               - column:
+                   name: type_id
+                   type: int
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: type
+                   type: varchar(25)
+                   constraints:
+                     nullable: true
+               - column:
+                   name: pattern
+                   type: varchar(150)
+                   constraints:
+                     nullable: false

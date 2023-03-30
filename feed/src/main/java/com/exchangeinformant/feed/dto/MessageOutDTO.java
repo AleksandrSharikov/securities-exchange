@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Schema(name = "Выходное сообщение", description = "Сообщение передаваемое на ленту")
 public class MessageOutDTO {
+    // Модель сообщения отправляемого на фронтэнд
     @Schema(description = "Непосредственно подготовленное сообщение")
     private String message;
 

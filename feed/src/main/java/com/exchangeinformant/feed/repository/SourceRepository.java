@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public interface SourceRepository extends JpaRepository<MessageSources, Integer> {
+    //Репозиторий для источников сообщений
 }
