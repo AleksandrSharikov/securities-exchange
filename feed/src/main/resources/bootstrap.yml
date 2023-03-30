@@ -4,30 +4,32 @@ server:
 spring:
   application:
     name: feed
+
+
   cloud:
     config:
       profile: local
       discovery:
         enabled: false
         service-id: config-server
-#    stream:
-#      function:
-#        definition: userInfoConsumer
-#      bindings:
-#        producer-out-0:
-#          destination: ei.user
-#          producer:
-#            required-groups:
-#              - user-group
-#        userInfoConsumer-in-0:
-#          destination: ei.quotes
-#          group: quotes-group
+
+    function:
+        definition: rabbitListener;testPutController
+    stream:
+      bindings:
+        rabbitListener-in-0:
+          destination: feed-exchange
+          group: messages
+        testPutController-out-0:
+          destination: feed-exchange
+          group: message
 
   rabbitmq:
     host: localhost
     port: 5672
     username: rm
     password: rmp
+
 
 
   security:
