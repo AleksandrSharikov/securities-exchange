@@ -4,6 +4,7 @@ package com.exchangeinformant.feed.services;
 import com.exchangeinformant.feed.controllers.MessageController;
 import com.exchangeinformant.feed.dto.MessageInDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,12 @@ import java.util.function.Supplier;
 public class StreamListener {
 
     private final MessageService messageService;
+    private final MessageController messageController;
 
-    public StreamListener(MessageService messageService) {
+    @Autowired
+    public StreamListener(MessageService messageService, MessageController messageController) {
         this.messageService = messageService;
+        this.messageController = messageController;
     }
 
     @Bean
@@ -31,7 +35,7 @@ public class StreamListener {
 
     @Bean
     public Supplier<MessageInDTO> testPutController() {
-        return () -> MessageController.sendMessage();
+        return () -> MessageController.publishMessage();
     }
 
 }

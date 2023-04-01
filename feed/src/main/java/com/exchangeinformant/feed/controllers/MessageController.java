@@ -11,8 +11,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Slf4j
 @RestController
@@ -22,7 +25,6 @@ public class MessageController {
 
 
     private final MessageService messageService;
-    private static MessageInDTO staticMessage;
 
     @Autowired
     public MessageController(MessageService messageService ) {
@@ -31,16 +33,22 @@ public class MessageController {
 
     @Operation(summary = "Контроллер для отправки сообщений в очередь с целью тестирования")
     @PostMapping("/publish")
-    public String publishMessage(@RequestBody MessageInDTO messageInDTO) {
-        staticMessage = messageInDTO;
+    public MessageInDTO publishMessage(@RequestBody MessageInDTO messageInDTO) {
+
         //template.convertAndSend(RabbitConfig.EXCHANGE, RabbitConfig.KEY, messageInDTO);
-        sendMessage();
+        sendMessage(messageInDTO);
         log.info("Post controller get something");
-        return "Message Published";
+        return messageInDTO;
     }
 
-    public static MessageInDTO sendMessage() {
-        return staticMessage;
+
+
+
+    @Bean
+    public Supplier<MessageInDTO> sendMessage(MessageInDTO message) {
+        public Supplier<MessageInDTO> testPutController() {
+            return () -> message;   };
+        return testPutController;
     }
 
     @Operation(summary = "Получение ленты для пользователя с определённым id и минимальным rank")
