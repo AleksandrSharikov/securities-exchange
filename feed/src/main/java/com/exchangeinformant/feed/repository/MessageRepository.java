@@ -29,8 +29,4 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
     @Query("UPDATE Message m SET m.unread = false WHERE m.id = ?1")
     void markRead(Long id);
 
-    // В целях тестирования помечает все сообщения непрочитанными кроме специально помеченных прочитанными
-    @Modifying
-    @Query("UPDATE Message m SET m.unread = true WHERE m.data NOT LIKE '%read%'")
-    void makeAllUnread();
 }
