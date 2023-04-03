@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Модель сообщения отправляемого на фронтэнд
+ */
 @Data
 @AllArgsConstructor
 @Getter
 @Setter
 @Schema(name = "Выходное сообщение", description = "Сообщение передаваемое на ленту")
 public class MessageOutDTO {
-    // Модель сообщения отправляемого на фронтэнд
     @Schema(description = "Непосредственно подготовленное сообщение")
     private String message;
 

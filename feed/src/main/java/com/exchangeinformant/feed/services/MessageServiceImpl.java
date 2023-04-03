@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Сервис для сообщений
+ */
 @Slf4j
 @Service
 public class MessageServiceImpl implements MessageService {
-
-// Сервис для сообщений
     private final MessageRepository messageRepository;
     private final SourceRepository sourceRepository;
     private final MessageMapperImpl messageMapper;
@@ -32,7 +33,10 @@ public class MessageServiceImpl implements MessageService {
         this.messageMapper = messageMapper;
     }
 
-    // Получение и сохранение сообщения в БД
+    /**
+     * Получение и сохранение сообщения в БД
+     * @param messageInDTO Непосредственно, входящее сообщение из очереди
+     */
     @Override
     public void receiveMessage(MessageInDTO messageInDTO) {
         log.info("Message \" {} \" go to service", messageInDTO);
@@ -44,7 +48,10 @@ public class MessageServiceImpl implements MessageService {
         log.info("Message has been processed");
     }
 
-    // Попытка определить важность по источнику
+    /**
+     * Попытка определить важность по источнику
+     * @param message Сообщение
+     */
     void setRank(Message message) {
         if(sourceRepository.existsById(message.getSourceId())) {
             message.setRank(sourceRepository.getReferenceById(message.getSourceId()).getDefaultRank());
@@ -52,12 +59,21 @@ public class MessageServiceImpl implements MessageService {
 
     }
 
-    // Перегруженный следующий метод без указания важности
+    /**
+     * Перегруженный следующий метод для получения сообщения со всеми важностями
+     * @param userId ID пользователя, для которого запрашивается сообщение
+     * @return Страница списка сообщений для отправки на фронтенд
+     */
     public List<MessageOutDTO> unreadMessageList(long userId){
        return unreadMessageList(userId, 0);
     }
 
-    // Получение страницы из списка сообщений для пользователя
+    /**
+     * Получения списка сообщений
+     * @param userId ID пользователя, для которого запрашивается сообщение
+     * @param rank Минимальная важность сообщения
+     * @return Страница списка сообщений для отправки на фронтенд
+     */
     @Override
     public List<MessageOutDTO> unreadMessageList(long userId, int rank) {
         // Получение списка сообщений из БД

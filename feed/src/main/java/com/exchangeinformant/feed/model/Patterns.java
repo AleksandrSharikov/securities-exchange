@@ -6,6 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
+/**
+ * База шаблонов для сообщений
+ */
 @Entity
 @Data
 @Getter
@@ -14,17 +17,20 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "text_patterns")
 public class Patterns {
-
-    // База шаблонов для сообщений
+    /**
+     * ID
+     */
     @Id
     @Column(name = "type_id")
     int id;
-
-// Просто название сообщений такого типа
+    /**
+     * Название сообщений такого типа
+     */
     @Column(name = "type")
     String type;
-
-// Шаблон для String.format
+    /**
+     * Шаблон для String.format
+     */
     @Column(name = "pattern")
     String pattern;
 }

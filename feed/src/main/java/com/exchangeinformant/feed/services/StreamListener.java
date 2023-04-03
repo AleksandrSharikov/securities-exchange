@@ -9,16 +9,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.function.Consumer;
 
-
+/**
+ * RabbitMQ через Spring Cloud
+ */
 @Slf4j
 @Component
 public class StreamListener {
-
-    // RabbitMQ через Spring Cloud
-
     private final MessageService messageService;
-
-
     @Autowired
     public StreamListener(MessageService messageService) {
         this.messageService = messageService;

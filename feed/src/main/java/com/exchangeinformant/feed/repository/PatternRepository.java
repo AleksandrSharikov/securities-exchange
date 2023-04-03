@@ -4,7 +4,9 @@ import com.exchangeinformant.feed.model.Patterns;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Репозиторий для шаблонов
+ */
 @Repository
 public interface PatternRepository extends JpaRepository<Patterns,Integer> {
-    // Репозиторий для шаблонов
 }

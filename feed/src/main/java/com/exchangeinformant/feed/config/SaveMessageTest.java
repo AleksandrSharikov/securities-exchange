@@ -9,12 +9,13 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+/**
+ * Тестовый класс для заполнения БД при старте в целях тестирования
+ */
 
 @Component
 public class SaveMessageTest implements ApplicationRunner {
 
-    // Тестовый класс для заполнения БД при старте в целях тестирования
     private final MessageRepository messageRepository;
     private final PatternRepository patternRepository;
     @Autowired

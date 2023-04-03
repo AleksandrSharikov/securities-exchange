@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.MissingFormatArgumentException;
 
+/**
+ * Мэппер сообщения из БД в отправляемое на фронтэнд
+ */
 @Service
 public class MessageMapperImpl {
-
-    // Мэппер сообщения из БД в отправляемое на фронтэнд
     private final PatternRepository patternRepository;
     @Autowired
     public MessageMapperImpl(PatternRepository patternRepository) {
@@ -20,6 +21,12 @@ public class MessageMapperImpl {
     }
 
     //Если для сообщения предусмотрен шаблон, пытаемся его применить
+
+    /**
+     * Мэппер
+     * @param message Сообщение для пользователя из БД
+     * @return DTO для отправки на фтонтенд
+     */
     public MessageOutDTO  messageToTdo(Message  message) {
 
         if(patternRepository.existsById(message.getType_id())) {
