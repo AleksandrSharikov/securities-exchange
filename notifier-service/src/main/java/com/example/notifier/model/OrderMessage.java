@@ -30,4 +30,8 @@ public class OrderMessage {
 
     @NonNull
     private Map<String, String> texts;
+
+    public OrderMessage(String json) {
+        System.out.println(json);
+    }
 }

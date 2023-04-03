@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8069
 spring:
   application:
     name: notifier-service
@@ -28,4 +28,7 @@ spring:
           auth: true
           ssl:
             trust: smtp.yandex.ru
-limit_retry_for_sender_service: 3
+retrySendingService:
+  field:
+    limit_retry_for_sender_service: 3
+    fixedRateValue: 5000
