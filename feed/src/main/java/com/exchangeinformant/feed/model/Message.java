@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * Сообщение для хранения в БД
+ * The message to be stored in DB
  */
 @Entity
 @Table(name = "feed")
@@ -23,8 +23,8 @@ import java.time.LocalDateTime;
 @ToString
 public class Message {
     /**
-     * Конструктор из входного сообщения, что бы не создавать мэппер для элементарной операции
-     * @param messageInDTO Сообщение полученное от другого сервиса
+     * The constructor to build message from messageInDTO to avoid creating mapper for simple operation
+     * @param messageInDTO Message received  from another service
      */
     public Message(MessageInDTO messageInDTO){
         this();
@@ -37,7 +37,7 @@ public class Message {
     }
 
     /**
-     * ID сообщения
+     * Messages id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,38 +45,38 @@ public class Message {
     @JsonIgnore
     private Long id;
     /**
-     * Id пользаователя, которому оно адресовано
+     * Id of the user to whom the message is addressed
      */
     @Column(name = "user_id")
     private Long userId;
     /**
-     * Флаг непрочитанного сообщения (сообщения хранятся в БД даже когда были прочитаны)
+     * The unread message flag (messages are stored in the DB even after they are read)
      */
     @Column(name = "unread")
     private boolean unread = true;
     /**
-     * Время получения (на самом деле получения из очереди, но думаю, они различаются на доли секунды)
+     * The message receiving time (Indeed the time of receiving from RabbitMQ)
      */
     @Column(name = "time")
     private LocalDateTime receivingTime;
     /**
-     * Id сервиса отправившего сообщение
+     * Id of the service sender
      */
     @Column(name = "source_id")
     private int sourceId;
     /**
-     * Тип сообщения (по нему в БД находится шаблон, если есть)
+     * Message type (for the search of patterns in the DB if they are presented)
      */
     @Column(name = "type_id")
     private int type_id;
     /**
-     *Важность сообщения. Чем тут цифра больше, тем важнее.
+     * The importance rank of the message. The higher it is more important the message
      */
 // Не уверен в необходимости данного поля
     @Column(name =  "rank")
     private int rank;
     /**
-     * Собственно данные.  Можно заменить на другой тип данных, но, мне кажется просто текст удобнее
+     * Data of message
      */
     @Column(name = "data")
     private String data;

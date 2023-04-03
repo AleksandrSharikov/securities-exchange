@@ -3,7 +3,7 @@ package com.exchangeinformant.feed.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 /**
- * Сообщение получаемое с других сервисов
+ * Message received from other services
  */
 @Data
 @NoArgsConstructor
@@ -12,17 +12,17 @@ import lombok.*;
 @Setter
 public class MessageInDTO {
     /**
-     * id пользователя адресата сообщения
+     * id of the user to which the message is addressed
      */
     @Schema(description = "id пользователя адресата сообщения")
     private long userId;
     /**
-     * id сервиса отправившего сообщение
+     * id of service that send the message
      */
     @Schema(description = "id сервиса отправившего сообщение")
     private int sourceId;
     /**
-     * сообщение
+     * The message
      */
     @Schema(description = "сообщение")
     private String data;

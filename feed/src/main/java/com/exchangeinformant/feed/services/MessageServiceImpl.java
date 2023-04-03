@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Сервис для сообщений
+ * Messages service
  */
 @Slf4j
 @Service
@@ -34,8 +34,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     /**
-     * Получение и сохранение сообщения в БД
-     * @param messageInDTO Непосредственно, входящее сообщение из очереди
+     * Receiving and saving messages in DB
+     * @param messageInDTO The incoming message from RabbitMQ
      */
     @Override
     public void receiveMessage(MessageInDTO messageInDTO) {
@@ -49,8 +49,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     /**
-     * Попытка определить важность по источнику
-     * @param message Сообщение
+     * Attempt to find sources rank
+     * @param message The message
      */
     void setRank(Message message) {
         if(sourceRepository.existsById(message.getSourceId())) {
@@ -60,19 +60,19 @@ public class MessageServiceImpl implements MessageService {
     }
 
     /**
-     * Перегруженный следующий метод для получения сообщения со всеми важностями
-     * @param userId ID пользователя, для которого запрашивается сообщение
-     * @return Страница списка сообщений для отправки на фронтенд
+     * The overloaded next method for getting messages with all ranks
+     * @param userId ID of the user fot whom messages are required
+     * @return a page of the message list to be sent to the front end
      */
     public List<MessageOutDTO> unreadMessageList(long userId){
        return unreadMessageList(userId, 0);
     }
 
     /**
-     * Получения списка сообщений
-     * @param userId ID пользователя, для которого запрашивается сообщение
-     * @param rank Минимальная важность сообщения
-     * @return Страница списка сообщений для отправки на фронтенд
+     * Getting the messages list
+     * @param userId ID of the user fot whom messages are required
+     * @param rank Minimum rank of the message
+     * @return a page of the message list to be sent to the front end
      */
     @Override
     public List<MessageOutDTO> unreadMessageList(long userId, int rank) {

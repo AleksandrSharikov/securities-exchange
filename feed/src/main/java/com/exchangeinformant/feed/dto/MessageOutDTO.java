@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Модель сообщения отправляемого на фронтэнд
+ * The model of a message to be sent to the front end
  */
 @Data
 @AllArgsConstructor

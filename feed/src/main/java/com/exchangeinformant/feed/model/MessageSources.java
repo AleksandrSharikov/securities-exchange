@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Модель для хранения в БД информации об источниках сообщений
+ * Model for storage in the DB of the message sources
  */
 @Data
 @Getter
@@ -17,18 +17,18 @@ import lombok.Setter;
 public class MessageSources {
 
     /**
-     * Список источников сообщений
+     * The list of the messages sources
      */
     @Id
     @Column(name = "source_id")
     private int sourceID;
     /**
-     * Важность выставляемая для сообщений из этого источника
+     * Default rank for this source
      */
     @Column(name = "default_rank")
     private int defaultRank;
     /**
-     * Название источника сообщений
+     * Source name
      */
     @Column(name = "source_name")
     private String name;

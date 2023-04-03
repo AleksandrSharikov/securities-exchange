@@ -10,7 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * Тестовый класс для заполнения БД при старте в целях тестирования
+ * Test class for filling DB during app start in test purposes
  */
 
 @Component

@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Сервис для получения сообщений и отправки их на ленту для каждого пользователя
+ * @author Karpov Aleksey, Sharikov Aleksandr
+ * The service of receiving messages from different other services, storing them and sending to users news feed
  */
 @SpringBootApplication
 public class FeedApplication {

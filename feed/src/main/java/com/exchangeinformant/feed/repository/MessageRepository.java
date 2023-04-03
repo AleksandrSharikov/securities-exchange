@@ -13,29 +13,29 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Получение сообщений для пользователя id важностью не меньше rank
+ * Getting of the list of messages for user with certain id and the importance noy less than rank
+ * @see Message
  */
 @Repository
 @Transactional
 public interface MessageRepository extends JpaRepository<Message,Long> {
     /**
-     * Характеристики постраничной выдачи и сортировки
+     * Pageble properties
      */
     Pageable pageable = PageRequest.of(0, 5, Sort.by("receivingTime").descending());
-
+//не нашёл способа выполнить два запроса в одном методе, по этому использовал два метода
     /**
-     * не нашёл способа выполнить два запроса в одном методе, по этому использовал два метода
-     * @param id id пользователя, для которого запрашиваются сообщения
-     * @param rank Минимальная важность сообщения
-     * @param pageable Характеристики постраничной выдачи и сортировки
-     * @return Страница списка сообщенй
+     * @param id Users id
+     * @param rank Minimum rank of the messages
+     * @param pageable Pagination and sort settings
+     * @return Page from the list of messages
      */
     @Query("SELECT m FROM Message m WHERE m.userId = ?1 and m.unread= true and m.rank >= ?2")
     List<Message> messagesForUser(long id, int rank, Pageable pageable);
 
     /**
-     * Помечает сообщения прочитанными
-     * @param id ID Сообщения которое нужно пометить прочитанным
+     * Marks message as read
+     * @param id ID of the message to be marked read
      */
     @Modifying
     @Query("UPDATE Message m SET m.unread = false WHERE m.id = ?1")

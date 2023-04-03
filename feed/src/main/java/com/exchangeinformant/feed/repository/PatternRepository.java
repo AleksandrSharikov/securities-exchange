@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Репозиторий для шаблонов
+ * Pattern repository
+ * @see Patterns
  */
 @Repository
 public interface PatternRepository extends JpaRepository<Patterns,Integer> {

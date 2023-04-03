@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 /**
- * База шаблонов для сообщений
+ * DB of the messsages paterns
  */
 @Entity
 @Data
@@ -24,12 +24,12 @@ public class Patterns {
     @Column(name = "type_id")
     int id;
     /**
-     * Название сообщений такого типа
+     * Name of this type of messages (Eg: News, or Transactions...)
      */
     @Column(name = "type")
     String type;
     /**
-     * Шаблон для String.format
+     * Patterns for String.format
      */
     @Column(name = "pattern")
     String pattern;

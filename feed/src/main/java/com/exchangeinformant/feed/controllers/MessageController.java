@@ -32,11 +32,10 @@ public class MessageController {
     }
 
     /**
-     * Контроллер выдаёт список сообщений для пользователя
-     * @param id - id пользвователя
-     * @param rank - степень важности сообщений, которые нужно выдать
-     * @return страница из 5ти непрочитанных сообщений для пользователя,
-     * в порядке от новых к старым
+     * Controller provides a list of messages for certain user
+     * @param id - Users id
+     * @param rank - The rank of messages importance
+     * @return The page of 5 unread messages of certain user, ordered from new to old
      */
     @Operation(summary = "Получение ленты для пользователя с определённым id и минимальным rank")
     @GetMapping(value = {"/{id}/{rank}","/{id}"})

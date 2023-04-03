@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Репозиторий для источников сообщений
+ * Message source repository
+ * @see MessageSources
  */
 @Repository
 @Transactional

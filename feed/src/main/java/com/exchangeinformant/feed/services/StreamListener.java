@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Consumer;
 
 /**
- * RabbitMQ через Spring Cloud
+ * RabbitMQ Spring Cloud
  */
 @Slf4j
 @Component
