@@ -1,6 +1,5 @@
 package com.exchangeinformant.feed.mappers;
 
-
 import com.exchangeinformant.feed.dto.MessageOutDTO;
 import com.exchangeinformant.feed.model.Message;
 import com.exchangeinformant.feed.repository.PatternRepository;
@@ -15,6 +14,7 @@ import java.util.MissingFormatArgumentException;
 @Service
 public class MessageMapperImpl {
     private final PatternRepository patternRepository;
+
     @Autowired
     public MessageMapperImpl(PatternRepository patternRepository) {
         this.patternRepository = patternRepository;
@@ -24,18 +24,19 @@ public class MessageMapperImpl {
 
     /**
      * Mapper
+     *
      * @param message Message from DB
      * @return DTO to be sent to the front end
      */
-    public MessageOutDTO  messageToTdo(Message  message) {
+    public MessageOutDTO messageToTdo(Message message) {
 
-        if(patternRepository.existsById(message.getType_id())) {
+        if (patternRepository.existsById(message.getType_id())) {
             try {
-            String[] datas = message.getData().split(",");
-            return new MessageOutDTO(String.format(patternRepository.getReferenceById(message.getType_id()).getPattern(), datas));
-    // В случае ошибки шаблона всё равно отдаём сообщение на фронтэнд, но с замечанием
-    // В принципе можно и статус ответа изменить, если нужно
-            } catch(MissingFormatArgumentException mfae) {
+                String[] datas = message.getData().split(",");
+                return new MessageOutDTO(String.format(patternRepository.getReferenceById(message.getType_id()).getPattern(), datas));
+                // В случае ошибки шаблона всё равно отдаём сообщение на фронтэнд, но с замечанием
+                // В принципе можно и статус ответа изменить, если нужно
+            } catch (MissingFormatArgumentException mfae) {
                 return new MessageOutDTO(message.getData() + " <- WRONG FORMAT!");
             }
         }

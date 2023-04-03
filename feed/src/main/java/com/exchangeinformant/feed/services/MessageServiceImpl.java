@@ -10,6 +10,7 @@ import com.exchangeinformant.feed.repository.SourceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     MessageServiceImpl(MessageRepository messageRepository,
                        SourceRepository sourceRepository,
-                       MessageMapperImpl messageMapper){
+                       MessageMapperImpl messageMapper) {
         this.messageRepository = messageRepository;
         this.sourceRepository = sourceRepository;
         this.messageMapper = messageMapper;
@@ -35,6 +36,7 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * Receiving and saving messages in DB
+     *
      * @param messageInDTO The incoming message from RabbitMQ
      */
     @Override
@@ -50,10 +52,11 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * Attempt to find sources rank
+     *
      * @param message The message
      */
     void setRank(Message message) {
-        if(sourceRepository.existsById(message.getSourceId())) {
+        if (sourceRepository.existsById(message.getSourceId())) {
             message.setRank(sourceRepository.getReferenceById(message.getSourceId()).getDefaultRank());
         }
 
@@ -61,17 +64,19 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * The overloaded next method for getting messages with all ranks
+     *
      * @param userId ID of the user fot whom messages are required
      * @return a page of the message list to be sent to the front end
      */
-    public List<MessageOutDTO> unreadMessageList(long userId){
-       return unreadMessageList(userId, 0);
+    public List<MessageOutDTO> unreadMessageList(long userId) {
+        return unreadMessageList(userId, 0);
     }
 
     /**
      * Getting the messages list
+     *
      * @param userId ID of the user fot whom messages are required
-     * @param rank Minimum rank of the message
+     * @param rank   Minimum rank of the message
      * @return a page of the message list to be sent to the front end
      */
     @Override
@@ -79,7 +84,7 @@ public class MessageServiceImpl implements MessageService {
         // Получение списка сообщений из БД
         List<Message> messages = messageRepository.messagesForUser(userId, rank, MessageRepository.pageable);
         List<MessageOutDTO> answer = new ArrayList<>();
-        for(Message message : messages) {
+        for (Message message : messages) {
             answer.add(messageMapper.messageToTdo(message)); // Мэппинг каждого сообщения из БД в ДТО
             messageRepository.markRead(message.getId());     // Пометка каждого сообщения прочиитанным
         }

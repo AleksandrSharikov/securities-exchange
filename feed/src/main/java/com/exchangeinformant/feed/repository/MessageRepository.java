@@ -14,19 +14,21 @@ import java.util.List;
 
 /**
  * Getting of the list of messages for user with certain id and the importance noy less than rank
+ *
  * @see Message
  */
 @Repository
 @Transactional
-public interface MessageRepository extends JpaRepository<Message,Long> {
+public interface MessageRepository extends JpaRepository<Message, Long> {
     /**
      * Pageble properties
      */
     Pageable pageable = PageRequest.of(0, 5, Sort.by("receivingTime").descending());
 //не нашёл способа выполнить два запроса в одном методе, по этому использовал два метода
+
     /**
-     * @param id Users id
-     * @param rank Minimum rank of the messages
+     * @param id       Users id
+     * @param rank     Minimum rank of the messages
      * @param pageable Pagination and sort settings
      * @return Page from the list of messages
      */
@@ -35,6 +37,7 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
 
     /**
      * Marks message as read
+     *
      * @param id ID of the message to be marked read
      */
     @Modifying

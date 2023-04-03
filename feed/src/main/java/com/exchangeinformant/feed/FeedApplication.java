@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Karpov Aleksey, Sharikov Aleksandr
- * The service of receiving messages from different other services, storing them and sending to users news feed
+ * The service of receiving messages from different other services, storing them and sending to the users news feed
  */
 @SpringBootApplication
 public class FeedApplication {

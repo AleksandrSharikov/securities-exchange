@@ -12,6 +12,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * unit test for controller of get request
+ */
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 public class MessageControllerTest {
@@ -21,8 +24,8 @@ public class MessageControllerTest {
 
     @Test
     @DisplayName("Should get message by id")
-    void shouldGetCard() throws Exception {
-        mockMvc.perform(get("/feed/{id}/{rank}", 5, 0))
+    void shouldGetMessage() throws Exception {
+        mockMvc.perform(get("/feed/{id}/{rank}", 0, 0))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

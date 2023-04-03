@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 @Component
 public class StreamListener {
     private final MessageService messageService;
+
     @Autowired
     public StreamListener(MessageService messageService) {
         this.messageService = messageService;
@@ -28,4 +29,4 @@ public class StreamListener {
             messageService.receiveMessage(messageInDTO);
         };
     }
-    }
+}

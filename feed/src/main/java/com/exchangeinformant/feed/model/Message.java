@@ -24,9 +24,10 @@ import java.time.LocalDateTime;
 public class Message {
     /**
      * The constructor to build message from messageInDTO to avoid creating mapper for simple operation
+     *
      * @param messageInDTO Message received  from another service
      */
-    public Message(MessageInDTO messageInDTO){
+    public Message(MessageInDTO messageInDTO) {
         this();
         this.userId = messageInDTO.getUserId();
         this.sourceId = messageInDTO.getSourceId();
@@ -73,7 +74,7 @@ public class Message {
      * The importance rank of the message. The higher it is more important the message
      */
 // Не уверен в необходимости данного поля
-    @Column(name =  "rank")
+    @Column(name = "rank")
     private int rank;
     /**
      * Data of message
