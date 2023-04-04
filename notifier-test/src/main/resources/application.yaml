@@ -1,0 +1,11 @@
+server:
+  port: 0
+spring:
+  application:
+    name: notifier-test
+  kafka:
+    bootstrap-servers: localhost:9092
+kafka:
+  topic:
+    name: topic1
+    name2: topic2

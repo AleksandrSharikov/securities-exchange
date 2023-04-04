@@ -26,12 +26,5 @@ public class OrderMessage {
     private String serviceSender;
 
     @NonNull
-    private String subject;
-
-    @NonNull
     private Map<String, String> texts;
-
-    public OrderMessage(String json) {
-        System.out.println(json);
-    }
 }

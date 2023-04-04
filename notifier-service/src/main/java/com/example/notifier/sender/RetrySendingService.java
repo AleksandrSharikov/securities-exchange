@@ -34,8 +34,7 @@ public class RetrySendingService {
     /**
      * Интервал запуска планировщика. 1000 = 1 секунда.
      */
-    @Value("${retrySendingService.field.fixedRateValue}")
-    private final long fixedRateValue = 5000;
+    private final long fixedRateValue = 5000; // TODO установить нужное значение
 
     /**
      * Метод-планировщик. Срабатывает каждый раз с интервалом указанным в параметре fixedRate.
@@ -60,8 +59,11 @@ public class RetrySendingService {
         if (message.getNumberTryToSend() == retryLimit) {
             message.sendingStatus = SendingStatus.DEPRECATED;
             log.info("Message ID {} has been moved to the '{}' group", message.getId(), SendingStatus.DEPRECATED);
+            messageService.save(message);
             return false;
+        } else {
+            log.info("Retry to send message ID {}. Number: {}", message.getId(), message.getNumberTryToSend());
+            return true;
         }
-        return true;
     }
 }

@@ -23,12 +23,6 @@ public class SenderService implements Consumer<Message> {
 
     @Override
     public void accept(Message message) {
-        message.setNumberTryToSend((byte) (message.getNumberTryToSend() + 1));
-
-        if (message.getNumberTryToSend() > 1) {
-            log.info("Retry to send message ID {}. Number: {}", message.getId(), message.getNumberTryToSend());
-        }
-
         Date now = new Date();
         message.setDateLastTrySend(now);
         messageService.save(message);
@@ -38,10 +32,11 @@ public class SenderService implements Consumer<Message> {
                 emailSender.sendMessage(message);
                 break;
             case "Other":
-                // Здесь добавляем другой сендер способный отправлять сообщения
+                // Здесь добавляем другой сендер-сервис способный отправлять сообщения
                 break;
         }
 
+        message.setNumberTryToSend((byte) (message.getNumberTryToSend() + 1));
         message.sendingStatus = SendingStatus.SENT;
         message.setDateSend(now);
         messageService.save(message);
