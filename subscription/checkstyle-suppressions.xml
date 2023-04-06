@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<suppressions>
+        <suppress files=".*Application.java"
+                  checks="FinalClassCheck"/>
+        <suppress files=".*Test.java"
+                  checks="MagicNumber"/>
+        <suppress checks="HideUtilityClassConstructor" files=".*Application.java"/>
+        <suppress checks="FinalParameters" files=".*Application.java"/>
+        <suppress checks="naming.MemberName"
+                  files="PaymentProofService.java"/>
+</suppressions>

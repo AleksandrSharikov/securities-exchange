@@ -1,7 +1,15 @@
 package com.exchangeinformant.subscription.exception;
 
-public class ResourceNotFoundException extends RuntimeException{
-    public ResourceNotFoundException(String message) {
+/**
+ * Исключение, которое выбрасывается, когда запрашиваемый ресурс не найден.
+ */
+public class ResourceNotFoundException extends RuntimeException {
+    /**
+     * Конструктор класса ResourceNotFoundException.
+     *
+     * @param message описание ошибки
+     */
+    public ResourceNotFoundException(final String message) {
         super(message);
     }
 }

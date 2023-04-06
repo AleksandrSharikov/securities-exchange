@@ -1,7 +1,15 @@
 package com.exchangeinformant.subscription.exception;
 
-public class ServerErrorException extends RuntimeException{
-    public ServerErrorException(String message) {
+/**
+ * Исключение, которое выбрасывается, когда на серверной стороне возникает ошибка.
+ */
+public class ServerErrorException extends RuntimeException {
+    /**
+     * Конструктор класса ServerErrorException.
+     *
+     * @param message описание ошибки
+     */
+    public ServerErrorException(final String message) {
         super(message);
     }
 }
