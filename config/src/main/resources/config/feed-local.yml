@@ -6,3 +6,11 @@ spring:
   instance:
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 30
+
+    application:
+      name: feed
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: rm
+      password: rmp

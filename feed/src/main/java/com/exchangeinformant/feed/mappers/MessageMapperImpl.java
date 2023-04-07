@@ -27,7 +27,8 @@ public class MessageMapperImpl {
      * @param message Message from DB
      * @return DTO to be sent to the front end
      */
-    public MessageOutDTO  messageToTdo(Message  message) {
+    public MessageOutDTO messageToOutDTO(Message  message) {
+
 
         if(patternRepository.existsById(message.getType_id())) {
             try {

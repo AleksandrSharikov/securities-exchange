@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class MessageInDTO {
     /**
      * id of the user to which the message is addressed
