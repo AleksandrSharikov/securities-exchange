@@ -4,8 +4,8 @@ spring:
     password: postgres
     url: jdbc:postgresql://localhost:5432/postgres
   instance:
-      preferIpAddress: true
-      lease-renewal-interval-in-seconds: 30
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
 
 springdoc:
   swagger-ui:

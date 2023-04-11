@@ -16,8 +16,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(jsr250Enabled = true)
 public class ResourceServerConfig {
 
+    /**
+     * Создает конфигурацию цепочки фильтров безопасности для вашего веб-приложения.
+     *
+     * Этот метод может безопасно переопределяться в подклассах, если вы хотите внести свои собственные изменения
+     * в цепочку фильтров. Переопределяющие методы должны вызывать этот метод и выполнить любые необходимые настройки
+     * после его вызова.
+     *
+     * @param http Объект HttpSecurity, используемый для конфигурации более глубокого уровня безопасности.
+     * @return Объект SecurityFilterChain для цепочки фильтров безопасности.
+     * @throws Exception Если произошла ошибка во время конфигурации безопасности.
+     */
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
                 .anyRequest().authenticated()
@@ -27,6 +38,10 @@ public class ResourceServerConfig {
         return http.build();
     }
 
+    /**
+     * Создает конвертер для JWT, возвращающий список ролей из JWT.
+     * @return Объект Converter для конвертирования Jwt в объект AbstractAuthenticationToken с присвоенными ролями.
+     */
     private Converter<Jwt, ? extends AbstractAuthenticationToken> jwtAuthenticationConverter() {
         JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
         jwtConverter.setJwtGrantedAuthoritiesConverter(new RealmRoleConverter());

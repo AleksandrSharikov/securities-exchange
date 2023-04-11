@@ -6,20 +6,46 @@ import com.exchangeinformant.subscription.util.Timer.TimerSubscriptionEnd;
 import com.exchangeinformant.subscription.util.enums.Status;
 import com.exchangeinformant.subscription.util.error.MessageError;
 import com.exchangeinformant.subscription.util.rabbitMQ.PaymentProofService;
+import org.springframework.stereotype.Service;
 
+/**
+ * Класс, реализующий логику для сервиса проверки оплаты.
+ */
+@Service
 public class LogicForPaymentProofService {
-    SubscriptionServiceImpl subscriptionServiceImpl;
-    TimerSubscriptionEnd timerSubscriptionEnd;
-    SubscriptionDTO subscriptionDTO;
-    MessageError messageError;
-    Tariff tariff;
+    /**
+     * Сервис подписок.
+     */
+    private SubscriptionServiceImpl subscriptionServiceImpl;
+    /**
+     * Таймер окончания подписки.
+     */
+    private TimerSubscriptionEnd timerSubscriptionEnd;
+    /**
+     * DTO объект подписки.
+     */
+    private SubscriptionDTO subscriptionDTO;
+    /**
+     * Объект ошибки сообщения.
+     */
+    private MessageError messageError;
+    /**
+     * Объект тарифа.
+     */
+    private Tariff tariff;
 
-    public void logicForPayment(PaymentProofService paymentProofService) {
+    /**
+     * Метод для проверки условий оплаты подписки и изменения статуса подписки.
+     *
+     * @param paymentProofService объект, содержащий информацию об оплате подписки.
+     */
+    public void logicForPayment(final PaymentProofService paymentProofService) {
         subscriptionDTO = subscriptionServiceImpl.getSubscription(paymentProofService.getSubscription_id());
         if (tariff.getTariffCost() != Integer.parseInt(paymentProofService.getPay_amount())) {
             if (subscriptionDTO.getStatus() != Status.ACTIVE) {
                 subscriptionDTO.setStatus(Status.PAYMENT_ERROR);
-                subscriptionDTO.setErrorDescription(messageError.createErrorDescription("Оплата не соответствует заданному тарифу и подписка не активна"));
+                subscriptionDTO.setErrorDescription(messageError.createErrorDescription(
+                        "Оплата не соответствует заданному тарифу и подписка не активна"));
                 subscriptionServiceImpl.updateSubscription(subscriptionDTO);
             }
         } else {

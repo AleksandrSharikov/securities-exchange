@@ -1,6 +1,6 @@
 package com.exchange.payingservice.service;
 
-import com.example.core.common.UserInfo;
+import com.exchange.payingservice.util.JwtTokenParser;
 import com.exchange.payingservice.dto.PaymentDTO;
 import com.exchange.payingservice.dto.StubPaymentDTO;
 import com.exchange.payingservice.entity.Card;
@@ -95,7 +95,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public ResponseEntity<PaymentStatus> methodGetBodyToStubPayment(StubPaymentDTO stubPaymentDTO, Principal principal) {
-        UserInfo userInfo = new UserInfo();
+        JwtTokenParser jwtTokenParser = new JwtTokenParser();
         String amount = stubPaymentDTO.getItems().get("amount");
 
         Map<String, String> testMap = new HashMap<>();
@@ -113,7 +113,7 @@ public class PaymentServiceImpl implements PaymentService {
             streamBridge.send("payment-proof", new PaymentProof(
                     Long.parseLong(stubPaymentDTO.getItems().get("subscription_id")),
                     amount,
-                    userInfo.getExtID(principal)));
+                    jwtTokenParser.getExtID(principal)));
         } catch (PaymentException | HttpClientErrorException.UnprocessableEntity e) {
             paymentStatus.setStatus(Status.ERROR); //ignore Exception and save Error in DB
         }
