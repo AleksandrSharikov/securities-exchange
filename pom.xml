@@ -16,6 +16,7 @@
     <description>Exchange informant</description>
     <modules>
         <module>core</module>
+        <module>feed</module>
         <module>user-profile</module>
         <module>subscription</module>
         <module>server</module>

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
+
+    application:
+      name: feed
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: rm
+      password: rmp

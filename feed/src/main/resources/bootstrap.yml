@@ -1,0 +1,33 @@
+server:
+  forward-headers-strategy: framework # https://stackoverflow.com/questions/70906081/springboot-swagger3-failed-to-load-remote-configuration
+  port: 0
+spring:
+  application:
+    name: feed
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rm
+    password: rmp
+
+  cloud:
+    config:
+      profile: local
+      discovery:
+        enabled: false
+        service-id: config-server
+    function:
+        definition: rabbitListener
+    stream:
+      bindings:
+        rabbitListener-in-0:
+          destination: feed-exchange
+          group: messages
+
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8890/realms/project-realm/protocol/openid-connect/certs

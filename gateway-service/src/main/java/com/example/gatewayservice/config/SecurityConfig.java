@@ -27,7 +27,7 @@ public class SecurityConfig {
                                                             ServerLogoutSuccessHandler handler) {
         http
                 .authorizeExchange()
-                .pathMatchers("/actuator/**", "/")
+                .pathMatchers("/actuator/**", "/","/swagger-ui/**")
                 .permitAll()
                 .and()
                 .authorizeExchange()

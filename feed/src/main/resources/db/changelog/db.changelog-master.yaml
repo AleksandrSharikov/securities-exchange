@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-feed.yaml
+  - include:
+      file: db/changelog/changeset/create-sources.yaml
+  - include:
+      file: db/changelog/changeset/create-patterns.yaml
