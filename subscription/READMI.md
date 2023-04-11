@@ -187,7 +187,7 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
 
 “title”: “Тариф не существует”,
 
-“message”: “По заданным параметрам не удалось найти тариф для создания подписки”,
+“messageBuilder”: “По заданным параметрам не удалось найти тариф для создания подписки”,
 
 “code”: “tariff_not_found”,
 
@@ -201,7 +201,7 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
 
 “title”: “Не кдалось создать подписку”,
 
-“message”: “По заданным параметрам не удалось создать подписку”,
+“messageBuilder”: “По заданным параметрам не удалось создать подписку”,
 
 “code”: “subscription_not_saved”,
 
@@ -215,7 +215,7 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
 
 “title”: “Не предвиденная ошибка сервера”,
 
-“message”: “Пожалуйста попробуйте позже”,
+“messageBuilder”: “Пожалуйста попробуйте позже”,
 
 “code”: “server_error”,
 

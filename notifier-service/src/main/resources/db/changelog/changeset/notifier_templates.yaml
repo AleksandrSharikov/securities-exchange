@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: notifier_templates-0
+      author: a-hasiev
+      changes:
+        - createTable:
+            tableName: notifier_templates
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: subject
+                  type: varchar(255)
+              - column:
+                  name: text
+                  type: varchar

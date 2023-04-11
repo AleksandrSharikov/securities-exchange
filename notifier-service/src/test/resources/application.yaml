@@ -1,0 +1,30 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: notifier-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rm
+    password: rmp
+  kafka:
+    bootstrap-servers: localhost:9092
+  cloud:
+    config:
+      profile: local
+      discovery:
+        enabled: false
+        service-id: config-server
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    protocol: smtps
+    username: asadas.asasdasd@yandex.ru
+    password: nlzezznxutzpiyws
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            trust: smtp.yandex.ru

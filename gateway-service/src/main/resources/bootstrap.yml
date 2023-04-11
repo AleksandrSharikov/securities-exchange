@@ -22,6 +22,15 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+        #Регистрация notifier-service
+        - id: notifier-service
+          uri: lb://notifier-service
+          predicates:
+            - Path=/notifier/**
+          filters:
+            - StripPrefix=1
+            - name: Retry
+
         #Регистрация paying-service
         - id: paying-service
           uri: lb://paying-service
